@@ -233,7 +233,7 @@ function fullDate(ts){return new Date(parseInt(ts)).toLocaleString()}
 
 // Confirm dialog (replaces browser confirm())
 var cfmCallback=null;
-function showConfirm(msg,cb){$('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';cfmCallback=cb;$('cfm-yes').onclick=function(){closeConfirm();if(cfmCallback)cfmCallback()}}
+function showConfirm(msg,cb){$('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';$('cfm-yes').style.display='';cfmCallback=cb;$('cfm-yes').onclick=function(){var fn=cfmCallback;closeConfirm();if(fn)fn()}}
 function closeConfirm(){$('cfm-bg').style.display='none';$('cfm-box').style.display='none';cfmCallback=null}
 
 // Theme
@@ -372,7 +372,17 @@ function toggleMute(){api('/api/mute',{token:myTk,username:viewingUser},function
 function loadBlockMuteStatus(un){apiGet('/api/user-status/'+un+'?viewer='+myU,function(d){$('pv-block-btn').value=d.blocked?'Unblock':'Block';$('pv-mute-btn').value=d.muted?'Unmute':'Mute'})}
 
 // Edit post
-function editPost(id,currentText){var newText=prompt('Edit post:',currentText);if(newText===null||newText===currentText)return;api('/api/edit-post',{token:myTk,postId:id,text:newText},function(d){if(d.error)alert(d.error);else refreshFeed()})}
+function editPost(id,currentText){
+  var msg='<b>Edit post:</b><br><textarea class="I" id="edit-textarea" rows="3" maxlength="280" style="width:100%">'+esc(currentText)+'</textarea>';
+  $('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';$('cfm-yes').style.display='';
+  $('cfm-yes').value='Save';
+  $('cfm-yes').onclick=function(){
+    var newText=$('edit-textarea').value.trim();
+    closeConfirm();$('cfm-yes').value='Yes';
+    if(newText&&newText!==currentText){api('/api/edit-post',{token:myTk,postId:id,text:newText},function(d){if(d.error)alert(d.error);else refreshFeed()})}
+  };
+  setTimeout(function(){var ta=$('edit-textarea');if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length)}},100);
+}
 function showEdits(id){apiGet('/api/post/'+id+'/edits',function(d){if(!d.edits||!d.edits.length){alert('No edit history');return}var msg='Edit history:<br>';for(var i=0;i<d.edits.length;i++){msg+='<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:10px"><b>'+fullDate(d.edits[i].edited_at)+'</b><br>'+esc(d.edits[i].old_text)+' → '+esc(d.edits[i].new_text)+'</div>'}$('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';$('cfm-yes').style.display='none';$('cfm-yes').onclick=null;setTimeout(function(){$('cfm-yes').style.display=''},0)})}
 
 // Drafts
