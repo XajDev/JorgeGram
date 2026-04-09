@@ -4,224 +4,237 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <title>JorgeGram</title>
+<script src="/giphy-bundle.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Tahoma,Verdana,Arial,sans-serif;font-size:12px}
-body.xp-blue{background:#3a6ea5}
-body.xp-silver{background:#7a96a8}
-body.xp-olive{background:#7a8a5a}
-body.dark{background:#1a1a2e;color:#c0c0c0}
+body.xp-blue{background:#3a6ea5}body.xp-silver{background:#7a96a8}body.xp-olive{background:#7a8a5a}body.dark{background:#1a1a2e;color:#c0c0c0}
 .wrap{max-width:620px;margin:0 auto}
-/* NAV */
 .nv{padding:6px 12px;font-size:11px;border-bottom:2px groove #d4d0c8;background:#ece9d8}
 .nv a{color:#0a246a;text-decoration:none;padding:3px 10px;border:1px solid #ece9d8;margin-right:2px}
 .nv a:hover{border:1px outset #d4d0c8;background:#d4d0c8}
 .nv a.c{border:1px inset #d4d0c8;background:#fff;font-weight:bold}
-.nv b{color:#0a246a;margin-right:12px;font-size:13px}
-.nv .r{float:right}
-/* PANELS */
-.R{border:2px outset #d4d0c8;background:#ece9d8}
-.S{border:2px inset #d4d0c8;background:#fff}
+.nv b{color:#0a246a;margin-right:12px;font-size:13px}.nv .r{float:right}
+.R{border:2px outset #d4d0c8;background:#ece9d8}.S{border:2px inset #d4d0c8;background:#fff}
 .T{background:#0a246a;color:#fff;font-weight:bold;padding:3px 8px;font-size:11px}
 .B{font-family:Tahoma,Verdana,sans-serif;font-size:11px;border:2px outset #d4d0c8;background:#ece9d8;padding:2px 12px;cursor:pointer;color:#000}
-.B:active{border-style:inset}
-.Bs{font-size:10px;padding:1px 6px}
+.B:active{border-style:inset}.Bs{font-size:10px;padding:1px 6px}
 .I{font-family:Tahoma,Verdana,sans-serif;font-size:12px;border:2px inset #d4d0c8;padding:4px;background:#fff;color:#000;width:100%;resize:none}
 .mp{background:#ece9d8}
-/* TABS */
-.tabs{padding:4px 0}
-.tab{display:inline-block;padding:4px 16px;cursor:pointer;border:2px outset #d4d0c8;background:#d4d0c8;font-size:11px;margin-right:2px}
+.tab{display:inline-block;padding:4px 14px;cursor:pointer;border:2px outset #d4d0c8;background:#d4d0c8;font-size:11px;margin-right:2px}
 .tab.on{background:#ece9d8;border-bottom:2px solid #ece9d8;font-weight:bold}
-/* POST */
-.post{border:2px outset #d4d0c8;background:#ece9d8;margin:6px 0;padding:0}
+.post{border:2px outset #d4d0c8;background:#ece9d8;margin:6px 0}
 .post-head{padding:6px 8px;font-size:11px}
 .post-head img{width:28px;height:28px;border:1px solid #d4d0c8;object-fit:cover;vertical-align:middle;margin-right:6px}
-.post-dn{font-weight:bold;cursor:pointer}
-.post-dn:hover{text-decoration:underline}
+.post-dn{font-weight:bold;cursor:pointer}.post-dn:hover{text-decoration:underline}
 .post-un{color:gray;margin-left:4px}
-.post-time{color:gray;float:right;font-size:10px}
-.post-body{padding:4px 8px 8px;font-size:13px;word-wrap:break-word;line-height:1.4}
+.post-time{color:gray;float:right;font-size:10px;cursor:default}
+.post-body{padding:4px 8px 8px;font-size:13px;word-wrap:break-word;line-height:1.4;position:relative}
+.dbl-heart{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:60px;color:#c00;opacity:0;pointer-events:none;animation:heartpop .6s ease-out forwards;z-index:10}
+@keyframes heartpop{0%{opacity:0;transform:translate(-50%,-50%) scale(0)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}40%{transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}
 .post-img{max-width:100%;max-height:400px;border:1px solid #d4d0c8;margin-top:6px;cursor:pointer}
 .post-actions{padding:4px 8px;border-top:1px groove #d4d0c8;font-size:10px}
-.post-actions span{display:inline-block;margin-right:16px;cursor:pointer;padding:2px 6px;border:1px solid transparent}
+.post-actions span{display:inline-block;margin-right:12px;cursor:pointer;padding:2px 6px;border:1px solid transparent}
 .post-actions span:hover{border:1px outset #d4d0c8;background:#d4d0c8}
-.post-actions .active{font-weight:bold;color:#c00}
-.repost-label{padding:4px 8px;font-size:10px;color:gray;border-bottom:1px groove #d4d0c8}
-.reply-label{padding:4px 8px;font-size:10px;color:gray}
+.post-actions .act{font-weight:bold;color:#c00}
+.quote-box{border:1px solid #d4d0c8;background:#fff;margin:6px 8px;padding:6px;font-size:11px;cursor:pointer}
+.quote-box:hover{background:#f8f8f0}
 .badge-tag{font-size:8px;padding:0 3px;border:1px solid #999;background:#ffe;color:#333;margin-left:2px}
-.char-count{float:right;font-size:10px;color:gray}
-.char-count.over{color:#c00;font-weight:bold}
-/* PROFILE */
-.prof-header{padding:12px;text-align:center}
-.prof-pfp{width:80px;height:80px;border:2px inset #d4d0c8;object-fit:cover}
-.prof-stats span{display:inline-block;margin:0 10px;text-align:center}
+.hashtag{color:#0a246a;cursor:pointer;font-weight:bold}.hashtag:hover{text-decoration:underline}
+.char-count{float:right;font-size:10px;color:gray}.char-count.over{color:#c00;font-weight:bold}
+.prof-header{padding:12px;text-align:center}.prof-pfp{width:80px;height:80px;border:2px inset #d4d0c8;object-fit:cover}
+.prof-stats span{display:inline-block;margin:0 10px;text-align:center;cursor:pointer}.prof-stats span:hover{text-decoration:underline}
 .prof-stats b{display:block;font-size:14px}
-/* COMPOSE */
-.compose{margin:6px 0}
-/* LIGHTBOX */
+.notif-item{padding:6px 8px;border-bottom:1px groove #d4d0c8;font-size:11px;cursor:pointer}
+.notif-item:hover{background:#d4d0c8}.notif-item.unread{background:#fffff0;font-weight:bold}
+.user-row{padding:4px 8px;border-bottom:1px groove #d4d0c8;font-size:11px}
+.user-row img{width:24px;height:24px;border:1px solid #d4d0c8;object-fit:cover;vertical-align:middle;margin-right:4px}
 .lb-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:200;display:none;cursor:pointer;text-align:center}
 .lb-bg img{max-width:90vw;max-height:90vh;margin-top:5vh;border:3px outset #d4d0c8}
-/* MODAL */
 .mo-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:100;display:none}
 .mo-win{position:fixed;top:50%;left:50%;z-index:101;display:none;margin-top:-120px;margin-left:-160px;width:320px}
-/* DARK */
-body.dark .nv{background:#2a2a3e;border-color:#444}
-body.dark .nv a{color:#8080cc;border-color:#2a2a3e}
-body.dark .nv a:hover{background:#3a3a5e;border-color:#444}
-body.dark .nv a.c{background:#1a1a2e;border-color:#444;color:#aaccff}
-body.dark .nv b{color:#8888cc}
-body.dark .R{border-color:#444;background:#2a2a3e}
-body.dark .S{border-color:#444;background:#1a1a2e;color:#c0c0c0}
-body.dark .T{background:#1a1a3e;color:#c0c0e0}
-body.dark .B{border-color:#444;background:#2a2a3e;color:#c0c0c0}
-body.dark .I{border-color:#444;background:#1a1a2e;color:#c0c0c0}
-body.dark .mp{background:#2a2a3e}
-body.dark .post{border-color:#444;background:#2a2a3e}
-body.dark .post-actions{border-color:#444}
-body.dark .post-actions span:hover{border-color:#555;background:#3a3a5e}
-body.dark .tab{border-color:#444;background:#2a2a3e;color:#aaa}
-body.dark .tab.on{background:#2a2a3e;border-bottom-color:#2a2a3e;color:#c0c0e0}
-body.dark .post-img{border-color:#444}
-body.dark .repost-label{border-color:#444}
-body.dark .reply-label{color:#888}
-body.dark .badge-tag{background:#2a2a3e;border-color:#555;color:#aaa}
-body.dark a{color:#6688cc}
-/* SILVER */
-body.xp-silver .nv{background:#e0e0e0;border-color:#b0b0b0}
-body.xp-silver .nv a{color:#4a6a7a;border-color:#e0e0e0}
-body.xp-silver .nv b{color:#4a6a7a}
-body.xp-silver .R{border-color:#b0b0b0;background:#e8e8e8}
-body.xp-silver .post{border-color:#b0b0b0;background:#e8e8e8}
-body.xp-silver .T{background:#5a7a8a}
-body.xp-silver .B{border-color:#b0b0b0;background:#e0e0e0}
-body.xp-silver .I{border-color:#b0b0b0}
-body.xp-silver .mp{background:#e8e8e8}
-/* OLIVE */
-body.xp-olive .nv{background:#dde0c8;border-color:#a0a890}
-body.xp-olive .nv a{color:#4a5a2a;border-color:#dde0c8}
-body.xp-olive .nv b{color:#4a5a2a}
-body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}
-body.xp-olive .post{border-color:#a0a890;background:#e8e8d8}
-body.xp-olive .T{background:#5a6a3a}
-body.xp-olive .B{border-color:#a0a890;background:#dde0c8}
-body.xp-olive .I{border-color:#a0a890}
-body.xp-olive .mp{background:#e8e8d8}
+.notif-badge{background:#c00;color:#fff;font-size:9px;font-weight:bold;padding:0 4px;margin-left:2px}
+/* Confirm dialog */
+.confirm-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:300;display:none}
+.confirm-box{position:fixed;top:50%;left:50%;margin-top:-60px;margin-left:-120px;width:240px;z-index:301;display:none}
+/* Dark */
+body.dark .nv{background:#2a2a3e;border-color:#444}body.dark .nv a{color:#8080cc;border-color:#2a2a3e}body.dark .nv a:hover{background:#3a3a5e;border-color:#444}body.dark .nv a.c{background:#1a1a2e;border-color:#444;color:#aaccff}body.dark .nv b{color:#8888cc}
+body.dark .R{border-color:#444;background:#2a2a3e}body.dark .S{border-color:#444;background:#1a1a2e;color:#c0c0c0}body.dark .T{background:#1a1a3e;color:#c0c0e0}
+body.dark .B{border-color:#444;background:#2a2a3e;color:#c0c0c0}body.dark .I{border-color:#444;background:#1a1a2e;color:#c0c0c0}body.dark .mp{background:#2a2a3e}
+body.dark .post{border-color:#444;background:#2a2a3e}body.dark .post-actions{border-color:#444}body.dark .post-actions span:hover{border-color:#555;background:#3a3a5e}
+body.dark .tab{border-color:#444;background:#2a2a3e;color:#aaa}body.dark .tab.on{background:#2a2a3e;border-bottom-color:#2a2a3e;color:#c0c0e0}
+body.dark .quote-box{border-color:#444;background:#1a1a2e;color:#c0c0c0}body.dark .badge-tag{background:#2a2a3e;border-color:#555;color:#aaa}
+body.dark .hashtag{color:#8080cc}body.dark a{color:#6688cc}body.dark .notif-item{border-color:#444}body.dark .notif-item:hover{background:#3a3a5e}body.dark .notif-item.unread{background:#2a2a30}
+body.dark .user-row{border-color:#444}body.dark .confirm-box .mp{background:#2a2a3e}body.dark .mo-win .mp{background:#2a2a3e}
+body.dark select.I{background:#1a1a2e;color:#c0c0c0;border-color:#444}
+/* Silver */
+body.xp-silver .nv{background:#e0e0e0;border-color:#b0b0b0}body.xp-silver .nv a{color:#4a6a7a;border-color:#e0e0e0}body.xp-silver .nv b{color:#4a6a7a}
+body.xp-silver .R{border-color:#b0b0b0;background:#e8e8e8}body.xp-silver .post{border-color:#b0b0b0;background:#e8e8e8}body.xp-silver .T{background:#5a7a8a}body.xp-silver .B{border-color:#b0b0b0;background:#e0e0e0}body.xp-silver .I{border-color:#b0b0b0}body.xp-silver .mp{background:#e8e8e8}
+/* Olive */
+body.xp-olive .nv{background:#dde0c8;border-color:#a0a890}body.xp-olive .nv a{color:#4a5a2a;border-color:#dde0c8}body.xp-olive .nv b{color:#4a5a2a}
+body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{border-color:#a0a890;background:#e8e8d8}body.xp-olive .T{background:#5a6a3a}body.xp-olive .B{border-color:#a0a890;background:#dde0c8}body.xp-olive .I{border-color:#a0a890}body.xp-olive .mp{background:#e8e8d8}
 </style>
 </head>
 <body class="xp-blue">
-
-<!-- NAV -->
 <div class="nv">
   <b>JorgeGram</b>
   <a href="https://jorgepompacarrera.com">.com</a>
   <a href="https://jorgepompacarrera.net">.net</a>
   <a href="https://jorgepompacarrera.org">.org</a>
   <a href="https://jorgepompacarrera.info" class="c">.info</a>
-  <span class="r" id="nav-auth">
-    <input type="button" class="B Bs" value="Sign In" onclick="showAuth('li')">
-    <input type="button" class="B Bs" value="Register" onclick="showAuth('re')">
-  </span>
+  <span class="r" id="nav-auth"><input type="button" class="B Bs" value="Sign In" onclick="showAuth('li')"> <input type="button" class="B Bs" value="Register" onclick="showAuth('re')"></span>
   <span class="r" id="nav-user" style="display:none">
     <b id="nav-dn"></b>
+    <input type="button" class="B Bs" value="Notifs" onclick="swTab('notifs',this)"><span id="notif-badge-nav"></span>
+    <input type="button" class="B Bs" value="Bookmarks" onclick="swTab('bookmarks',this)">
     <input type="button" class="B Bs" value="Settings" onclick="showSettings()">
     <input type="button" class="B Bs" value="Logout" onclick="doLogout()">
   </span>
 </div>
-
 <div class="wrap">
-  <!-- TAB BAR -->
   <div class="tabs" id="main-tabs" style="display:none">
     <span class="tab on" onclick="swTab('timeline',this)">Timeline</span>
+    <span class="tab" onclick="swTab('foryou',this)">For You</span>
     <span class="tab" onclick="swTab('explore',this)">Explore</span>
+    <span class="tab" onclick="swTab('trending',this)">Trending</span>
     <span class="tab" onclick="swTab('search',this)">Search</span>
     <span class="tab" onclick="swTab('myprofile',this)">Profile</span>
   </div>
-
-  <!-- COMPOSE BOX -->
+  <!-- Trending tags -->
+  <div id="trending-tags" style="display:none;margin:4px 0;font-size:10px"></div>
+  <!-- Compose -->
   <div id="compose-box" class="compose R" style="display:none">
     <div class="T">New Post</div>
     <div class="mp" style="padding:8px">
-      <textarea class="I" id="compose-text" rows="3" maxlength="280" placeholder="What's happening?" oninput="updateCharCount()"></textarea>
+      <textarea class="I" id="compose-text" rows="3" maxlength="280" placeholder="What's happening?" oninput="updateCC()"></textarea>
       <div><span class="char-count" id="char-count">280</span>
         <input type="file" id="compose-img" accept="image/*" style="font-size:10px;margin-top:4px">
+        <input type="button" class="B Bs" value="GIF" onclick="openGifPicker()" style="margin-top:4px">
+        <input type="button" class="B Bs" value="Save Draft" onclick="saveDraft()" style="margin-top:4px">
         <input type="button" class="B" value="Post" onclick="submitPost()" style="float:right;margin-top:4px">
       </div>
-      <div id="compose-reply" style="display:none;font-size:10px;color:gray;margin-top:4px">Replying to <b id="reply-to-name"></b> <span style="color:#c00;cursor:pointer" onclick="cancelReply()">[cancel]</span></div>
+      <div id="gif-preview" style="display:none;margin-top:4px"><img id="gif-preview-img" style="max-height:100px;border:1px solid #d4d0c8"> <span style="color:#c00;cursor:pointer" onclick="clearGif()">[x]</span></div>
+      <div id="compose-reply" style="display:none;font-size:10px;color:gray;margin-top:4px">Replying to <b id="reply-to-name"></b> <span style="color:#c00;cursor:pointer" onclick="cancelReply()">[x]</span></div>
+      <div id="compose-quote" style="display:none;font-size:10px;color:gray;margin-top:4px">Quoting <b id="quote-name"></b> <span style="color:#c00;cursor:pointer" onclick="cancelQuote()">[x]</span></div>
+      <div id="poll-toggle" style="margin-top:4px"><input type="button" class="B Bs" value="Add Poll" onclick="togglePollForm()"></div>
+      <div id="poll-form" style="display:none;margin-top:4px;border-top:1px groove #d4d0c8;padding-top:4px">
+        <input class="I" id="poll-o1" placeholder="Option 1" maxlength="60" style="margin:2px 0"><br>
+        <input class="I" id="poll-o2" placeholder="Option 2" maxlength="60" style="margin:2px 0"><br>
+        <input class="I" id="poll-o3" placeholder="Option 3 (optional)" maxlength="60" style="margin:2px 0"><br>
+        <input class="I" id="poll-o4" placeholder="Option 4 (optional)" maxlength="60" style="margin:2px 0"><br>
+        Duration: <select class="I" id="poll-dur" style="width:100px"><option value="1">1 hour</option><option value="6">6 hours</option><option value="24" selected>24 hours</option><option value="72">3 days</option><option value="168">7 days</option></select>
+        <input type="button" class="B Bs" value="Remove Poll" onclick="togglePollForm()">
+      </div>
     </div>
   </div>
-
-  <!-- SEARCH BAR -->
-  <div id="search-bar" class="R" style="display:none;margin:6px 0;padding:8px">
-    <input class="I" id="search-q" placeholder="Search posts..." style="width:80%"> <input type="button" class="B" value="Search" onclick="doSearch()">
+  <!-- GIF Picker — SDK powered -->
+  <div id="gif-picker" class="R" style="display:none;margin:4px 0">
+    <div class="T">Search GIFs
+      <span class="tab" id="gif-tab-trending" onclick="gifTabMode('trending')" style="margin-left:8px;font-size:10px">Trending</span>
+      <span class="tab" id="gif-tab-stickers" onclick="gifTabMode('stickers')" style="font-size:10px">Stickers</span>
+      <input type="button" class="B Bs" value="X" onclick="closeGifPicker()" style="float:right">
+    </div>
+    <div class="mp" style="padding:8px">
+      <input class="I" id="gif-q" placeholder="Search GIFs..." oninput="gifSDKSearch()" style="margin-bottom:4px">
+      <div style="font-size:8px;color:gray">Powered by GIPHY</div>
+      <div id="gif-grid" style="max-height:250px;overflow-y:auto;overflow-x:hidden;margin-top:4px"></div>
+    </div>
   </div>
-
-  <!-- PROFILE VIEW -->
+  <!-- Search bar -->
+  <div id="search-bar" class="R" style="display:none;margin:6px 0;padding:8px">
+    <input class="I" id="search-q" placeholder="Search posts or #hashtags..." style="width:80%"> <input type="button" class="B" value="Go" onclick="doSearch()">
+  </div>
+  <!-- Profile view -->
   <div id="profile-view" style="display:none">
     <div class="R prof-header" id="prof-box">
+      <div id="pv-banner" style="height:40px;margin:-12px -12px 8px -12px"></div>
       <img class="prof-pfp" id="pv-pfp" src=""><br>
       <b id="pv-dn" style="font-size:16px"></b> <span id="pv-badges"></span><br>
       <span style="color:gray" id="pv-un"></span><br>
       <div id="pv-bio" style="margin:6px 0;font-size:12px"></div>
       <div class="prof-stats">
-        <span><b id="pv-posts">0</b>Posts</span>
-        <span><b id="pv-followers">0</b>Followers</span>
-        <span><b id="pv-following">0</b>Following</span>
+        <span onclick="showUserList('posts')"><b id="pv-posts">0</b>Posts</span>
+        <span onclick="showFollowers()"><b id="pv-followers">0</b>Followers</span>
+        <span onclick="showFollowing()"><b id="pv-following">0</b>Following</span>
+        <span><b id="pv-streak">0</b>&#x1f525; Streak</span>
       </div>
-      <div style="margin-top:6px"><input type="button" class="B" id="pv-follow-btn" value="Follow" onclick="toggleFollow()"></div>
+      <div style="margin-top:6px" id="pv-actions">
+        <input type="button" class="B" id="pv-follow-btn" value="Follow" onclick="toggleFollow()">
+        <input type="button" class="B Bs" id="pv-block-btn" value="Block" onclick="toggleBlock()">
+        <input type="button" class="B Bs" id="pv-mute-btn" value="Mute" onclick="toggleMute()">
+      </div>
+      <div style="margin-top:6px">
+        <span class="tab on" id="ptab-posts" onclick="profTab('posts',this)">Posts</span>
+        <span class="tab" id="ptab-media" onclick="profTab('media',this)">Media</span>
+      </div>
+    </div>
+    <div id="suggested-box" style="display:none;margin:6px 0" class="R">
+      <div class="T">Who to follow</div>
+      <div id="suggested-list" class="mp" style="padding:4px"></div>
     </div>
   </div>
-
-  <!-- FEED -->
-  <div id="feed"></div>
-  <div id="load-more" style="text-align:center;padding:12px;display:none">
-    <input type="button" class="B" value="Load More" onclick="loadMore()">
+  <!-- Notifications -->
+  <div id="notifs-view" style="display:none"><div class="R"><div class="T">Notifications <input type="button" class="B Bs" value="Mark All Read" onclick="markRead()" style="float:right"></div><div id="notif-list" class="mp" style="max-height:500px;overflow-y:auto"></div></div></div>
+  <!-- User list modal inline -->
+  <div id="user-list-view" style="display:none"><div class="R"><div class="T" id="ul-title">Users</div><div id="ul-list" class="mp" style="max-height:400px;overflow-y:auto"></div></div></div>
+  <!-- Post of the Day -->
+  <div id="potd" style="display:none;margin:6px 0" class="R">
+    <div class="T">&#11088; Post of the Day</div>
+    <div id="potd-content"></div>
   </div>
+  <!-- Feed -->
+  <div id="feed"></div>
+  <div id="load-more" style="text-align:center;padding:12px;display:none"><input type="button" class="B" value="Load More" onclick="loadMore()"></div>
 </div>
-
-<!-- AUTH MODAL -->
+<!-- Auth Modal -->
 <div class="mo-bg" id="mo-bg" onclick="closeModal()"></div>
 <div class="mo-win R" id="mo-auth">
   <div class="T" id="auth-title">Sign In</div>
   <div class="mp" style="padding:16px">
-    <div id="auth-li">
-      <table cellspacing="4"><tr><td>Username:</td><td><input class="I" id="li-u" style="width:180px" maxlength="24"></td></tr>
-      <tr><td>Password:</td><td><input type="password" class="I" id="li-p" style="width:180px"></td></tr>
-      <tr><td></td><td><input type="button" class="B" value="Sign In >>" onclick="doLogin()"></td></tr>
-      <tr><td></td><td><div id="li-e" style="color:#f00;font-size:10px"></div></td></tr></table>
-    </div>
-    <div id="auth-re" style="display:none">
-      <table cellspacing="4"><tr><td>Username:</td><td><input class="I" id="re-u" style="width:180px" maxlength="24"></td></tr>
-      <tr><td>Display:</td><td><input class="I" id="re-d" style="width:180px" maxlength="24"></td></tr>
-      <tr><td>Password:</td><td><input type="password" class="I" id="re-p" style="width:180px"></td></tr>
-      <tr><td></td><td><input type="button" class="B" value="Create Account >>" onclick="doRegister()"></td></tr>
-      <tr><td></td><td><div id="re-e" style="color:#f00;font-size:10px"></div></td></tr></table>
-    </div>
+    <div id="auth-li"><table cellspacing="4"><tr><td>Username:</td><td><input class="I" id="li-u" style="width:180px" maxlength="24"></td></tr><tr><td>Password:</td><td><input type="password" class="I" id="li-p" style="width:180px"></td></tr><tr><td></td><td><input type="button" class="B" value="Sign In >>" onclick="doLogin()"></td></tr><tr><td></td><td><div id="li-e" style="color:#f00;font-size:10px"></div></td></tr></table></div>
+    <div id="auth-re" style="display:none"><table cellspacing="4"><tr><td>Username:</td><td><input class="I" id="re-u" style="width:180px" maxlength="24"></td></tr><tr><td>Display:</td><td><input class="I" id="re-d" style="width:180px" maxlength="24"></td></tr><tr><td>Password:</td><td><input type="password" class="I" id="re-p" style="width:180px"></td></tr><tr><td></td><td><input type="button" class="B" value="Create >>" onclick="doRegister()"></td></tr><tr><td></td><td><div id="re-e" style="color:#f00;font-size:10px"></div></td></tr></table></div>
     <div style="margin-top:8px;font-size:10px"><a href="#" id="auth-switch" onclick="toggleAuthMode();return false">Need an account? Register</a></div>
   </div>
 </div>
-
-<!-- SETTINGS MODAL -->
+<!-- Settings -->
 <div class="mo-win R" id="mo-set" style="width:340px;margin-left:-170px">
   <div class="T">Settings</div>
-  <div class="mp" style="padding:16px">
-    <b>Theme:</b><br>
-    <select class="I" id="s-theme" style="width:180px">
-      <option value="xp-blue">XP Blue</option><option value="xp-silver">XP Silver</option><option value="xp-olive">XP Olive</option><option value="dark">Dark</option>
-    </select> <input type="button" class="B Bs" value="Apply" onclick="applyTheme()"><br><br>
-    <div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div>
+  <div class="mp" style="padding:16px"><b>Theme:</b><br><select class="I" id="s-theme" style="width:180px"><option value="xp-blue">XP Blue</option><option value="xp-silver">XP Silver</option><option value="xp-olive">XP Olive</option><option value="dark">Dark</option></select> <input type="button" class="B Bs" value="Apply" onclick="applyTheme()"><br><br>
+  <b>Profile Banner Color:</b><br><input class="I" id="s-banner" maxlength="7" style="width:80px" placeholder="#0a246a"> <input type="button" class="B Bs" value="Set" onclick="saveBanner()"><br><br>
+  <input type="button" class="B" value="My Drafts" onclick="closeModal();swTab('drafts')"><br><br>
+  <div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div></div>
+</div>
+<!-- Liked By -->
+<div class="mo-win R" id="mo-likes" style="width:280px;margin-left:-140px">
+  <div class="T">Liked By</div>
+  <div class="mp" id="likes-list" style="padding:8px;max-height:300px;overflow-y:auto"></div>
+  <div class="mp" style="padding:4px 8px"><div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div></div>
+</div>
+<!-- Confirm -->
+<div class="confirm-bg" id="cfm-bg"></div>
+<div class="confirm-box R" id="cfm-box" style="display:none">
+  <div class="T">Confirm</div>
+  <div class="mp" style="padding:16px;text-align:center">
+    <div id="cfm-msg" style="margin-bottom:12px"></div>
+    <input type="button" class="B" value="Yes" id="cfm-yes"> <input type="button" class="B" value="No" onclick="closeConfirm()">
   </div>
 </div>
-
-<!-- LIGHTBOX -->
+<!-- Lightbox -->
 <div class="lb-bg" id="lb" onclick="this.style.display='none'"><img id="lb-img" src=""></div>
 
 <script>
-var myU='',myDN='',myCol='',myTk='',myTheme='xp-blue',curTab='explore',curFeed=[],replyTo=null,viewingUser='',oldestTs=null;
+var myU='',myDN='',myCol='',myTk='',myTheme='xp-blue',curTab='explore',replyTo=null,quoteOf=null,viewingUser='',oldestTs=null,selectedGif=null;
 function $(id){return document.getElementById(id)}
-function api(u,b,c){fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()}).then(c).catch(function(){c({error:'Connection error'})})}
+function api(u,b,c){fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()}).then(c).catch(function(){c({error:'err'})})}
 function apiGet(u,c){fetch(u).then(function(r){return r.json()}).then(c).catch(function(){c({error:'err'})})}
 function esc(t){if(!t)return'';var d=document.createElement('div');d.appendChild(document.createTextNode(t));return d.innerHTML}
-function timeAgo(ts){var d=Date.now()-parseInt(ts);if(d<60000)return'just now';if(d<3600000)return Math.floor(d/60000)+'m';if(d<86400000)return Math.floor(d/3600000)+'h';return Math.floor(d/86400000)+'d'}
+function timeAgo(ts){var d=Date.now()-parseInt(ts);if(d<60000)return'now';if(d<3600000)return Math.floor(d/60000)+'m';if(d<86400000)return Math.floor(d/3600000)+'h';return Math.floor(d/86400000)+'d'}
+function fullDate(ts){return new Date(parseInt(ts)).toLocaleString()}
+
+// Confirm dialog (replaces browser confirm())
+var cfmCallback=null;
+function showConfirm(msg,cb){$('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';cfmCallback=cb;$('cfm-yes').onclick=function(){closeConfirm();if(cfmCallback)cfmCallback()}}
+function closeConfirm(){$('cfm-bg').style.display='none';$('cfm-box').style.display='none';cfmCallback=null}
 
 // Theme
 var saved=localStorage.getItem('jorge-theme');if(saved){document.body.className=saved;myTheme=saved}
@@ -229,88 +242,183 @@ function applyTheme(){var t=$('s-theme').value;document.body.className=t;myTheme
 function showSettings(){$('s-theme').value=myTheme;$('mo-bg').style.display='block';$('mo-set').style.display='block'}
 
 // Auth
-window.onload=function(){var tk=localStorage.getItem('jg_token');if(tk){api('/api/auth',{token:tk},function(d){if(!d.error){myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;loggedIn()}else{localStorage.removeItem('jg_token')}})}else{swTab('explore')}}
-function showAuth(mode){$('mo-bg').style.display='block';$('mo-auth').style.display='block';if(mode==='re'){$('auth-li').style.display='none';$('auth-re').style.display='';$('auth-title').innerHTML='Register';$('auth-switch').innerHTML='Have an account? Sign in'}else{$('auth-li').style.display='';$('auth-re').style.display='none';$('auth-title').innerHTML='Sign In';$('auth-switch').innerHTML='Need an account? Register'}}
+window.onload=function(){var p=window.location.pathname;var tk=localStorage.getItem('jg_token');if(tk){api('/api/auth',{token:tk},function(d){if(!d.error){myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;loggedIn();handleRoute(p)}else{localStorage.removeItem('jg_token');handleRoute(p)}})}else{$('main-tabs').style.display='';handleRoute(p)}}
+function handleRoute(p){if(p.startsWith('/post/')){var id=p.split('/post/')[1];if(id)viewThread(id)}else if(p.startsWith('/user/')){var un=p.split('/user/')[1];if(un)viewUser(un)}else if(!myTk){swTab('explore')}}
+function showAuth(mode){$('mo-bg').style.display='block';$('mo-auth').style.display='block';if(mode==='re'){$('auth-li').style.display='none';$('auth-re').style.display='';$('auth-title').innerHTML='Register';$('auth-switch').innerHTML='Have account? Sign in'}else{$('auth-li').style.display='';$('auth-re').style.display='none';$('auth-title').innerHTML='Sign In';$('auth-switch').innerHTML='Need account? Register'}}
 function toggleAuthMode(){if($('auth-li').style.display==='none')showAuth('li');else showAuth('re')}
-function closeModal(){$('mo-bg').style.display='none';$('mo-auth').style.display='none';$('mo-set').style.display='none'}
-function doLogin(){var u=$('li-u').value,p=$('li-p').value;if(!u||!p){$('li-e').innerHTML='Fill both fields';return}api('/api/login',{username:u,password:p},function(d){if(d.error){$('li-e').innerHTML=esc(d.error)}else{myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
-function doRegister(){var u=$('re-u').value,d=$('re-d').value,p=$('re-p').value;if(!u||!d||!p){$('re-e').innerHTML='Fill all fields';return}api('/api/register',{username:u,displayName:d,password:p},function(r){if(r.error){$('re-e').innerHTML=esc(r.error)}else{myU=r.username;myDN=r.displayName;myCol=r.color;myTk=r.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
+function closeModal(){$('mo-bg').style.display='none';$('mo-auth').style.display='none';$('mo-set').style.display='none';$('mo-likes').style.display='none'}
+function doLogin(){var u=$('li-u').value,p=$('li-p').value;if(!u||!p){$('li-e').innerHTML='Fill both';return}api('/api/login',{username:u,password:p},function(d){if(d.error)$('li-e').innerHTML=esc(d.error);else{myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
+function doRegister(){var u=$('re-u').value,d=$('re-d').value,p=$('re-p').value;if(!u||!d||!p){$('re-e').innerHTML='Fill all';return}api('/api/register',{username:u,displayName:d,password:p},function(r){if(r.error)$('re-e').innerHTML=esc(r.error);else{myU=r.username;myDN=r.displayName;myCol=r.color;myTk=r.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
 $('li-u').onkeydown=$('li-p').onkeydown=function(e){if(e.keyCode===13)doLogin()};
 $('re-u').onkeydown=$('re-d').onkeydown=$('re-p').onkeydown=function(e){if(e.keyCode===13)doRegister()};
 function doLogout(){localStorage.removeItem('jg_token');location.reload()}
-function loggedIn(){$('nav-auth').style.display='none';$('nav-user').style.display='';$('nav-dn').innerHTML=esc(myDN);$('main-tabs').style.display='';$('compose-box').style.display='';swTab('timeline')}
+function loggedIn(){$('nav-auth').style.display='none';$('nav-user').style.display='';$('nav-dn').innerHTML=esc(myDN);$('main-tabs').style.display='';$('compose-box').style.display='';swTab('timeline');pollNotifs()}
+
+// Notification polling
+function pollNotifs(){if(!myTk)return;api('/api/notification-count',{token:myTk},function(d){if(d.count>0)$('notif-badge-nav').innerHTML='<span class="notif-badge">'+d.count+'</span>';else $('notif-badge-nav').innerHTML=''});setTimeout(pollNotifs,15000)}
 
 // Tabs
-function swTab(tab,el){curTab=tab;$('feed').innerHTML='';oldestTs=null;$('search-bar').style.display=tab==='search'?'':'none';$('profile-view').style.display=tab==='myprofile'||tab==='userprofile'?'':'none';$('compose-box').style.display=(myTk&&tab!=='search')?'':'none';if(el){var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';el.className='tab on'}if(tab==='timeline')loadTimeline();else if(tab==='explore')loadExplore();else if(tab==='myprofile'){viewingUser=myU;loadProfile(myU)}else if(tab==='userprofile')loadProfile(viewingUser)}
+function swTab(tab,el){curTab=tab;$('feed').innerHTML='';oldestTs=null;$('potd').style.display='none';$('search-bar').style.display=tab==='search'?'':'none';$('profile-view').style.display=(tab==='myprofile'||tab==='userprofile')?'':'none';$('notifs-view').style.display=tab==='notifs'?'':'none';$('user-list-view').style.display='none';$('trending-tags').style.display=(tab==='trending'||tab==='explore')?'':'none';$('compose-box').style.display=(myTk&&tab!=='search'&&tab!=='notifs'&&tab!=='bookmarks')?'':'none';$('load-more').style.display='none';if(el){var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';el.className='tab on'}if(tab==='timeline'){loadTimeline();loadPOTD()}else if(tab==='foryou')loadForYou();else if(tab==='explore'){loadExplore();loadTrendingTags()}else if(tab==='trending'){loadTrending();loadTrendingTags()}else if(tab==='myprofile'){viewingUser=myU;loadProfile(myU);loadSuggested()}else if(tab==='notifs')loadNotifs();else if(tab==='bookmarks')loadBookmarks();else if(tab==='drafts')loadDrafts();else if(tab==='userprofile')loadProfile(viewingUser)}
+
 function loadTimeline(){api('/api/timeline',{token:myTk,before:oldestTs||Date.now()+1},function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
 function loadExplore(){api('/api/explore',{token:myTk,before:oldestTs||Date.now()+1},function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
-function loadMore(){if(curTab==='timeline')loadTimeline();else if(curTab==='explore')loadExplore();else if(curTab==='userprofile'||curTab==='myprofile')loadUserPosts()}
-function loadProfile(un){viewingUser=un;$('profile-view').style.display='';apiGet('/api/profile/'+un+'?viewer='+myU,function(d){if(d.error)return;$('pv-dn').innerHTML=esc(d.displayName);$('pv-dn').style.color=d.color;$('pv-un').innerHTML='@'+esc(d.username);$('pv-bio').innerHTML=esc(d.bio||'');if(d.pfp){$('pv-pfp').src=d.pfp;$('pv-pfp').style.display=''}else $('pv-pfp').style.display='none';var badges='';if(d.badges)for(var i=0;i<d.badges.length;i++)badges+='<span class="badge-tag">'+esc(d.badges[i])+'</span>';$('pv-badges').innerHTML=badges;$('pv-posts').innerHTML=d.postCount;$('pv-followers').innerHTML=d.followerCount;$('pv-following').innerHTML=d.followingCount;if(un===myU){$('pv-follow-btn').style.display='none'}else{$('pv-follow-btn').style.display='';$('pv-follow-btn').value=d.isFollowing?'Unfollow':'Follow'}});$('feed').innerHTML='';oldestTs=null;loadUserPosts()}
+function loadTrending(){apiGet('/api/trending?viewer='+myU,function(d){if(d.posts)renderPosts(d.posts)})}
+function loadBookmarks(){api('/api/bookmarks',{token:myTk},function(d){if(d.posts)renderPosts(d.posts);if(!d.posts||!d.posts.length)$('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No bookmarks yet</div>'})}
+function loadMore(){if(curTab==='timeline')loadTimeline();else if(curTab==='explore')loadExplore();else if(curTab==='foryou')loadForYou();else if(curTab==='userprofile'||curTab==='myprofile')loadUserPosts()}
+function loadTrendingTags(){apiGet('/api/trending-tags',function(d){if(!d.tags||!d.tags.length){$('trending-tags').style.display='none';return}var h='Trending: ';for(var i=0;i<d.tags.length;i++)h+='<span class="hashtag" onclick="searchTag(\''+esc(d.tags[i].tag)+'\')">#'+esc(d.tags[i].tag)+'</span> ('+d.tags[i].count+') ';$('trending-tags').innerHTML=h;$('trending-tags').style.display=''})}
+function searchTag(tag){$('search-q').value='#'+tag;swTab('search');doSearch()}
+
+// Profile
+function loadProfile(un){viewingUser=un;$('profile-view').style.display='';apiGet('/api/profile/'+un+'?viewer='+myU,function(d){if(d.error)return;$('pv-dn').innerHTML=esc(d.displayName);$('pv-dn').style.color=d.color;$('pv-un').innerHTML='@'+esc(d.username);$('pv-bio').innerHTML=esc(d.bio||'');$('pv-banner').style.backgroundColor=d.bannerColor||'#0a246a';if(d.pfp){$('pv-pfp').src=d.pfp;$('pv-pfp').style.display=''}else $('pv-pfp').style.display='none';var badges='';if(d.badges)for(var i=0;i<d.badges.length;i++)badges+='<span class="badge-tag">'+esc(d.badges[i])+'</span>';$('pv-badges').innerHTML=badges;$('pv-posts').innerHTML=d.postCount;$('pv-followers').innerHTML=d.followerCount;$('pv-following').innerHTML=d.followingCount;if(un===myU){$('pv-follow-btn').style.display='none';$('pv-block-btn').style.display='none';$('pv-mute-btn').style.display='none'}else{$('pv-follow-btn').style.display='';$('pv-follow-btn').value=d.isFollowing?'Unfollow':'Follow';$('pv-block-btn').style.display='';$('pv-mute-btn').style.display='';loadBlockMuteStatus(un)}});$('feed').innerHTML='';oldestTs=null;profTabMode='posts';loadUserPosts();loadStreak(un)}
 function loadUserPosts(){apiGet('/api/user/'+viewingUser+'/posts?viewer='+myU+'&before='+(oldestTs||Date.now()+1),function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
 function toggleFollow(){api('/api/follow',{token:myTk,username:viewingUser},function(d){if(!d.error){$('pv-follow-btn').value=d.following?'Unfollow':'Follow';loadProfile(viewingUser)}})}
+function showFollowers(){$('user-list-view').style.display='';$('ul-title').innerHTML='Followers';apiGet('/api/user/'+viewingUser+'/followers',function(d){renderUserList(d.users||[])})}
+function showFollowing(){$('user-list-view').style.display='';$('ul-title').innerHTML='Following';apiGet('/api/user/'+viewingUser+'/following',function(d){renderUserList(d.users||[])})}
+function renderUserList(users){var el=$('ul-list');el.innerHTML='';for(var i=0;i<users.length;i++){var u=users[i];var div=document.createElement('div');div.className='user-row';var pfp=u.pfp?'<img src="'+u.pfp+'">':'';div.innerHTML=pfp+'<span style="color:'+(u.color||'#000')+';font-weight:bold;cursor:pointer" onclick="viewUser(\''+u.username+'\')">'+esc(u.display_name)+'</span> <span style="color:gray">@'+esc(u.username)+'</span>';el.appendChild(div)}}
+
+// Notifications
+function loadNotifs(){api('/api/notifications',{token:myTk},function(d){var el=$('notif-list');el.innerHTML='';if(!d.notifications||!d.notifications.length){el.innerHTML='<div style="padding:12px;color:gray;text-align:center">No notifications</div>';return}for(var i=0;i<d.notifications.length;i++){var n=d.notifications[i];var div=document.createElement('div');div.className='notif-item'+(n.read?'':' unread');var icon={like:'&#9829;',repost:'&#x1f501;',reply:'&#x1f4ac;',mention:'@',follow:'&#x1f464;',quote:'&#x1f4dd;'}[n.type]||'';var text=esc(n.display_name||n.from_user)+' ';if(n.type==='like')text+='liked your post';else if(n.type==='repost')text+='reposted your post';else if(n.type==='reply')text+='replied to your post';else if(n.type==='mention')text+='mentioned you';else if(n.type==='follow')text+='followed you';else if(n.type==='quote')text+='quoted your post';div.innerHTML=icon+' '+text+' <span style="color:gray;font-size:9px">'+timeAgo(n.created_at)+'</span>';if(n.post_id)div.onclick=(function(pid){return function(){viewThread(pid)}})(n.post_id);else if(n.from_user)div.onclick=(function(un){return function(){viewUser(un)}})(n.from_user);el.appendChild(div)}})}
+function markRead(){api('/api/notifications/read',{token:myTk},function(){loadNotifs();$('notif-badge-nav').innerHTML=''})}
 
 // Render posts
-function renderPosts(posts){for(var i=0;i<posts.length;i++){var p=posts[i];if(p.created_at)oldestTs=parseInt(p.created_at);renderPost(p)}}
+function renderPosts(posts){for(var i=0;i<posts.length;i++){oldestTs=parseInt(posts[i].created_at);renderPost(posts[i]);if(myTk)api('/api/view',{token:myTk,postId:posts[i].id},function(){})}}
 function renderPost(p){
-  var div=document.createElement('div');div.className='post';div.id='post-'+p.id;
-  var html='';
-  // Repost label
-  if(p.repost_of&&p.original){html+='<div class="repost-label">&#x1f501; '+esc(p.display_name)+' reposted</div>';p=p.original}
-  // Reply label
-  if(p.reply_to){html+='<div class="reply-label">Replying to a post</div>'}
-  // Header
-  var pfp=p.pfp?'<img src="'+p.pfp+'">':'';
-  var badges='';if(p.badges)for(var j=0;j<p.badges.length;j++)badges+='<span class="badge-tag">'+esc(p.badges[j])+'</span>';
-  html+='<div class="post-head">'+pfp+'<span class="post-dn" style="color:'+(p.color||'#000')+'" onclick="viewUser(\''+p.username+'\')">'+esc(p.display_name)+'</span>'+badges+'<span class="post-un">@'+esc(p.username)+'</span><span class="post-time">'+timeAgo(p.created_at)+'</span></div>';
-  // Body
-  html+='<div class="post-body">'+formatPostText(p.text);
+  var div=document.createElement('div');div.className='post';div.id='post-'+p.id;var html='';var origP=p;
+  div.onclick=function(e){if(e.target.tagName==='A'||e.target.tagName==='IMG'||e.target.tagName==='INPUT'||e.target.closest('.post-actions'))return;handleDoubleTap(origP.repost_of&&origP.original?origP.original.id:origP.id,div)};
+  if(p.repost_of&&p.original){html+='<div style="padding:4px 8px;font-size:10px;color:gray;border-bottom:1px groove #d4d0c8">&#x1f501; '+esc(p.display_name)+' reposted</div>';p=p.original}
+  if(p.reply_to)html+='<div style="padding:4px 8px;font-size:10px;color:gray">&#x21b3; Reply</div>';
+  var pfp=p.pfp?'<img src="'+p.pfp+'">':'';var badges='';if(p.badges)for(var j=0;j<p.badges.length;j++)badges+='<span class="badge-tag">'+esc(p.badges[j])+'</span>';
+  html+='<div class="post-head">'+pfp+'<span class="post-dn" style="color:'+(p.color||'#000')+'" onclick="viewUser(\''+p.username+'\')">'+esc(p.display_name)+'</span>'+badges+'<span class="post-un">@'+esc(p.username)+'</span><span class="post-time" title="'+fullDate(p.created_at)+'">'+timeAgo(p.created_at)+'</span></div>';
+  html+='<div class="post-body">'+fmtText(p.text);
   if(p.image_url)html+='<br><img class="post-img" src="'+p.image_url+'" onclick="openLB(\''+p.image_url+'\')">';
   if(p.gif_url)html+='<br><img class="post-img" src="'+p.gif_url+'" onclick="openLB(\''+p.gif_url+'\')">';
   html+='</div>';
+  // Quote embed
+  if(p.quoted||p.quote_of){var q=p.quoted;if(q)html+='<div class="quote-box" onclick="viewThread(\''+q.id+'\')"><b style="color:'+(q.color||'#000')+'">'+esc(q.display_name)+'</b> <span style="color:gray">@'+esc(q.username)+'</span><br>'+esc(q.text)+'</div>'}
   // Actions
-  var likeClass=p.liked?'active':'';
-  var repostClass=p.reposted?'active':'';
+  var lc=p.liked?'act':'',rc=p.reposted?'act':'',bc=p.bookmarked?'act':'';
   html+='<div class="post-actions">';
-  html+='<span onclick="doLike(\''+p.id+'\')" class="'+likeClass+'">&#9829; '+p.like_count+'</span>';
-  html+='<span onclick="doRepost(\''+p.id+'\')" class="'+repostClass+'">&#x1f501; '+p.repost_count+'</span>';
+  html+='<span onclick="doLike(\''+p.id+'\')" class="'+lc+'">&#9829; '+p.like_count+'</span>';
+  html+='<span onclick="doRepost(\''+p.id+'\')" class="'+rc+'">&#x1f501; '+p.repost_count+'</span>';
   html+='<span onclick="startReply(\''+p.id+'\',\''+esc(p.display_name)+'\')">&#x1f4ac; '+p.reply_count+'</span>';
+  html+='<span onclick="startQuote(\''+p.id+'\',\''+esc(p.display_name)+'\')">Quote</span>';
+  if(myTk)html+='<span onclick="doBookmark(\''+p.id+'\')" class="'+bc+'">'+(p.bookmarked?'&#9733;':'&#9734;')+'</span>';
   html+='<span onclick="viewThread(\''+p.id+'\')">View</span>';
-  if(p.username===myU)html+='<span onclick="deletePost(\''+p.id+'\')">Delete</span>';
+  html+='<span onclick="showLikes(\''+p.id+'\')">'+p.like_count+' likes</span>';
+  html+='<span onclick="copyLink(\''+p.id+'\')" title="Copy link">Link</span>';
+  html+='<span style="color:gray;border:none;cursor:default">&#128065; '+p.view_count+'</span>';
+  if(p.username===myU)html+='<span onclick="editPost(\''+p.id+'\',\''+esc(p.text).replace(/'/g,'\\&#39;')+'\')">Edit</span>';
+  if(p.username===myU)html+='<span onclick="deletePost(\''+p.id+'\')">Del</span>';
+  if(p.edited)html+='<span style="color:gray;border:none;cursor:pointer;font-style:italic" onclick="showEdits(\''+p.id+'\')">(edited)</span>';
   html+='</div>';
-  div.innerHTML=html;$('feed').appendChild(div);
-}
-function formatPostText(text){if(!text)return'';var h=esc(text);h=h.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color:#0000ff">$1</a>');h=h.replace(/@([a-zA-Z0-9_]+)/g,'<span style="color:#0000ff;cursor:pointer" onclick="viewUser(\'$1\')">@$1</span>');return h}
+  div.innerHTML=html;$('feed').appendChild(div)}
+function fmtText(t){if(!t)return'';var h=esc(t);h=h.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color:#0000ff">$1</a>');h=h.replace(/@([a-zA-Z0-9_]+)/g,'<span style="color:#0000ff;cursor:pointer" onclick="viewUser(\'$1\')">@$1</span>');h=h.replace(/#([a-zA-Z0-9_]+)/g,'<span class="hashtag" onclick="searchTag(\'$1\')">#$1</span>');return h}
 
 // Actions
-function doLike(id){api('/api/like',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
-function doRepost(id){api('/api/repost',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
-function deletePost(id){if(!confirm('Delete?'))return;api('/api/delete-post',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
-function refreshFeed(){$('feed').innerHTML='';oldestTs=null;if(curTab==='timeline')loadTimeline();else if(curTab==='explore')loadExplore();else if(curTab==='myprofile'||curTab==='userprofile')loadUserPosts()}
+function doLike(id){if(!myTk){showAuth('li');return}api('/api/like',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
+function doRepost(id){if(!myTk){showAuth('li');return}api('/api/repost',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
+function doBookmark(id){api('/api/bookmark',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
+function deletePost(id){showConfirm('Delete this post?',function(){api('/api/delete-post',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})})}
+function showLikes(id){$('mo-bg').style.display='block';$('mo-likes').style.display='block';apiGet('/api/post/'+id+'/likes',function(d){renderLikesList(d.users||[])})}
+function renderLikesList(users){var el=$('likes-list');el.innerHTML='';if(!users.length){el.innerHTML='<div style="padding:8px;color:gray">No likes yet</div>';return}for(var i=0;i<users.length;i++){var u=users[i];var div=document.createElement('div');div.className='user-row';var pfp=u.pfp?'<img src="'+u.pfp+'">':'';div.innerHTML=pfp+'<span style="color:'+(u.color||'#000')+';font-weight:bold;cursor:pointer" onclick="closeModal();viewUser(\''+u.username+'\')">'+esc(u.display_name)+'</span> <span style="color:gray">@'+esc(u.username)+'</span>';el.appendChild(div)}}
+function copyLink(id){var url='https://jorgepompacarrera.info/post/'+id;if(navigator.clipboard)navigator.clipboard.writeText(url);else{var t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)}alert('Link copied!')}
+function refreshFeed(){$('feed').innerHTML='';oldestTs=null;if(curTab==='timeline')loadTimeline();else if(curTab==='explore')loadExplore();else if(curTab==='trending')loadTrending();else if(curTab==='foryou')loadForYou();else if(curTab==='bookmarks')loadBookmarks();else if(curTab==='myprofile'||curTab==='userprofile')loadUserPosts();else if(curTab==='thread')viewThread(curThreadId)}
+var curThreadId='';
 
 // Compose
-function updateCharCount(){var remaining=280-$('compose-text').value.length;$('char-count').innerHTML=remaining;$('char-count').className=remaining<0?'char-count over':'char-count'}
-function startReply(postId,name){replyTo=postId;$('compose-reply').style.display='';$('reply-to-name').innerHTML=esc(name);$('compose-text').focus();window.scrollTo(0,0)}
+function updateCC(){var r=280-$('compose-text').value.length;$('char-count').innerHTML=r;$('char-count').className=r<0?'char-count over':'char-count'}
+function startReply(id,name){replyTo=id;quoteOf=null;$('compose-reply').style.display='';$('compose-quote').style.display='none';$('reply-to-name').innerHTML=esc(name);$('compose-text').focus();window.scrollTo(0,0)}
 function cancelReply(){replyTo=null;$('compose-reply').style.display='none'}
-function submitPost(){var text=$('compose-text').value.trim();var imgFile=$('compose-img').files[0];if(!text&&!imgFile){alert('Write something');return}
+function startQuote(id,name){quoteOf=id;replyTo=null;$('compose-quote').style.display='';$('compose-reply').style.display='none';$('quote-name').innerHTML=esc(name);$('compose-text').focus();window.scrollTo(0,0)}
+function cancelQuote(){quoteOf=null;$('compose-quote').style.display='none'}
+function submitPost(){var text=$('compose-text').value.trim();var imgFile=$('compose-img').files[0];
+  // Check if poll form is open
+  if($('poll-form').style.display!=='none'){submitPoll();return}
+  if(!text&&!imgFile&&!selectedGif){alert('Write something');return}
+  if(quoteOf){api('/api/quote',{token:myTk,text:text,postId:quoteOf},function(d){if(d.error)alert(d.error);else{$('compose-text').value='';cancelQuote();updateCC();refreshFeed()}});return}
   if(imgFile){var fd=new FormData();fd.append('image',imgFile);fd.append('token',myTk);fetch('/api/upload-image',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(d){if(d.url)createPost(text,d.url,null);else alert(d.error||'Upload failed')})}
+  else if(selectedGif){createPost(text,null,selectedGif)}
   else createPost(text,null,null)}
-function createPost(text,imageUrl,gifUrl){api('/api/post',{token:myTk,text:text,imageUrl:imageUrl,gifUrl:gifUrl,replyTo:replyTo},function(d){if(d.error){alert(d.error)}else{$('compose-text').value='';$('compose-img').value='';cancelReply();updateCharCount();refreshFeed()}})}
+function createPost(text,imageUrl,gifUrl){api('/api/post',{token:myTk,text:text,imageUrl:imageUrl,gifUrl:gifUrl,replyTo:replyTo},function(d){if(d.error)alert(d.error);else{$('compose-text').value='';$('compose-img').value='';cancelReply();clearGif();updateCC();refreshFeed()}})}
 
-// View user profile
-function viewUser(un){viewingUser=un;curTab='userprofile';$('profile-view').style.display='';$('search-bar').style.display='none';$('feed').innerHTML='';oldestTs=null;loadProfile(un);var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab'}
+// GIF Picker — SDK powered (@giphy/js-components)
+var gifPickerReady=false,gifMode='trending',gifSDKTO=null;
+function openGifPicker(){$('gif-picker').style.display='';if(!gifPickerReady){GiphyPicker.init('gif-grid',function(url){selectGif(url)});gifPickerReady=true}GiphyPicker.open('gif-grid');$('gif-q').focus()}
+function closeGifPicker(){$('gif-picker').style.display='none';GiphyPicker.close()}
+function gifTabMode(mode){gifMode=mode;var q=$('gif-q').value.trim();GiphyPicker.setMode('gif-grid',mode,q)}
+function gifSDKSearch(){clearTimeout(gifSDKTO);gifSDKTO=setTimeout(function(){var q=$('gif-q').value.trim();if(gifMode==='stickers')GiphyPicker.stickers('gif-grid',q);else if(q)GiphyPicker.search('gif-grid',q);else GiphyPicker.setMode('gif-grid','trending','')},400)}
+function selectGif(url){selectedGif=url;$('gif-preview-img').src=url;$('gif-preview').style.display='';closeGifPicker()}
+function clearGif(){selectedGif=null;$('gif-preview').style.display='none'}
 
-// View thread (single post + replies)
-function viewThread(id){$('feed').innerHTML='';$('profile-view').style.display='none';$('search-bar').style.display='none';oldestTs=null;curTab='thread';var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';apiGet('/api/post/'+id+'?viewer='+myU,function(d){if(d.error)return;renderPost(d.post);if(d.replies)for(var i=0;i<d.replies.length;i++)renderPost(d.replies[i]);$('load-more').style.display='none'})}
+// View user
+function viewUser(un){viewingUser=un;curTab='userprofile';$('profile-view').style.display='';$('search-bar').style.display='none';$('notifs-view').style.display='none';$('user-list-view').style.display='none';$('feed').innerHTML='';oldestTs=null;loadProfile(un);var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';history.pushState(null,'','/')}
+
+// Thread
+function viewThread(id){curThreadId=id;$('feed').innerHTML='';$('profile-view').style.display='none';$('search-bar').style.display='none';$('notifs-view').style.display='none';$('user-list-view').style.display='none';$('trending-tags').style.display='none';oldestTs=null;curTab='thread';var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';apiGet('/api/post/'+id+'?viewer='+myU,function(d){if(d.error){$('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">Post not found</div>';return}renderPost(d.post);if(d.replies)for(var i=0;i<d.replies.length;i++)renderPost(d.replies[i]);$('load-more').style.display='none';if(myTk)api('/api/view',{token:myTk,postId:id},function(){})})}
 
 // Search
-function doSearch(){var q=$('search-q').value.trim();if(!q)return;$('feed').innerHTML='';apiGet('/api/search?q='+encodeURIComponent(q)+'&viewer='+myU,function(d){if(d.posts)for(var i=0;i<d.posts.length;i++)renderPost(d.posts[i]);if(!d.posts||!d.posts.length)$('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No results</div>'})}
+function doSearch(){var q=$('search-q').value.trim();if(!q)return;$('feed').innerHTML='';apiGet('/api/search?q='+encodeURIComponent(q)+'&viewer='+myU,function(d){if(d.posts&&d.posts.length)for(var i=0;i<d.posts.length;i++)renderPost(d.posts[i]);else $('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No results</div>'})}
 $('search-q').onkeydown=function(e){if(e.keyCode===13)doSearch()};
+
+// Poll
+function togglePollForm(){var f=$('poll-form');if(f.style.display==='none'){f.style.display='';$('poll-toggle').style.display='none'}else{f.style.display='none';$('poll-toggle').style.display=''}}
+function submitPoll(){var text=$('compose-text').value.trim();var opts=[$('poll-o1').value.trim(),$('poll-o2').value.trim(),$('poll-o3').value.trim(),$('poll-o4').value.trim()].filter(function(o){return o});if(opts.length<2){alert('Need at least 2 options');return}api('/api/post-poll',{token:myTk,text:text,options:opts,duration:parseInt($('poll-dur').value)},function(d){if(d.error)alert(d.error);else{$('compose-text').value='';$('poll-o1').value='';$('poll-o2').value='';$('poll-o3').value='';$('poll-o4').value='';togglePollForm();updateCC();refreshFeed()}})}
+function votePoll(postId,idx){api('/api/poll-vote',{token:myTk,postId:postId,optionIdx:idx},function(d){if(d.error)alert(d.error);else refreshFeed()})}
+function loadPollUI(postId,container){apiGet('/api/poll/'+postId+'?viewer='+myU,function(d){if(d.error)return;var h='';var total=d.totalVotes||0;for(var i=0;i<d.options.length;i++){var count=d.votes[i]||0;var pct=total>0?Math.round(count/total*100):0;var voted=d.myVote===i;var canVote=d.myVote===null&&!d.ended;h+='<div style="margin:2px 0;padding:2px 4px;border:1px solid #d4d0c8;background:'+(voted?'#d0e0ff':'#fff')+';cursor:'+(canVote?'pointer':'default')+'" '+(canVote?'onclick="votePoll(\''+postId+'\','+i+')"':'')+'>'+esc(d.options[i])+' <b>'+pct+'%</b> ('+count+')</div>'}h+='<div style="font-size:9px;color:gray;margin-top:2px">'+total+' votes · '+(d.ended?'Ended':'Ends '+timeAgo(d.endsAt))+'</div>';container.innerHTML=h})}
+
+// Block/mute
+function toggleBlock(){showConfirm('Block/unblock '+viewingUser+'?',function(){api('/api/block',{token:myTk,username:viewingUser},function(d){if(!d.error){$('pv-block-btn').value=d.blocked?'Unblock':'Block';if(d.blocked)refreshFeed()}})})}
+function toggleMute(){api('/api/mute',{token:myTk,username:viewingUser},function(d){if(!d.error)$('pv-mute-btn').value=d.muted?'Unmute':'Mute'})}
+function loadBlockMuteStatus(un){apiGet('/api/user-status/'+un+'?viewer='+myU,function(d){$('pv-block-btn').value=d.blocked?'Unblock':'Block';$('pv-mute-btn').value=d.muted?'Unmute':'Mute'})}
+
+// Edit post
+function editPost(id,currentText){var newText=prompt('Edit post:',currentText);if(newText===null||newText===currentText)return;api('/api/edit-post',{token:myTk,postId:id,text:newText},function(d){if(d.error)alert(d.error);else refreshFeed()})}
+function showEdits(id){apiGet('/api/post/'+id+'/edits',function(d){if(!d.edits||!d.edits.length){alert('No edit history');return}var msg='Edit history:<br>';for(var i=0;i<d.edits.length;i++){msg+='<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:10px"><b>'+fullDate(d.edits[i].edited_at)+'</b><br>'+esc(d.edits[i].old_text)+' → '+esc(d.edits[i].new_text)+'</div>'}$('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';$('cfm-yes').style.display='none';$('cfm-yes').onclick=null;setTimeout(function(){$('cfm-yes').style.display=''},0)})}
+
+// Drafts
+function saveDraft(){var text=$('compose-text').value;if(!text.trim())return;api('/api/save-draft',{token:myTk,text:text,gifUrl:selectedGif},function(d){if(!d.error)alert('Draft saved!')})}
+function loadDrafts(){api('/api/drafts',{token:myTk},function(d){var el=$('feed');el.innerHTML='';if(!d.drafts||!d.drafts.length){el.innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No drafts</div>';return}for(var i=0;i<d.drafts.length;i++){var dr=d.drafts[i];var div=document.createElement('div');div.className='post';div.innerHTML='<div class="post-body">'+esc(dr.text)+'</div><div class="post-actions"><span onclick="useDraft(\''+dr.id+'\',\''+esc(dr.text).replace(/'/g,'\\&#39;')+'\')">Use</span><span onclick="deleteDraft(\''+dr.id+'\')">Delete</span><span style="color:gray;border:none">'+timeAgo(dr.updated_at)+'</span></div>';el.appendChild(div)}})}
+function useDraft(id,text){$('compose-text').value=text;updateCC();api('/api/delete-draft',{token:myTk,id:id},function(){});swTab('timeline')}
+function deleteDraft(id){api('/api/delete-draft',{token:myTk,id:id},function(){loadDrafts()})}
+
+// Profile banner
+function saveBanner(){var c=$('s-banner').value;api('/api/update-banner',{token:myTk,color:c},function(d){if(d.error)alert(d.error);else alert('Banner updated!')})}
+
+// Profile tabs (posts vs media)
+var profTabMode='posts';
+function profTab(mode,el){profTabMode=mode;var tabs=el.parentNode.getElementsByTagName('span');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';el.className='tab on';$('feed').innerHTML='';oldestTs=null;if(mode==='posts')loadUserPosts();else loadUserMedia()}
+function loadUserMedia(){apiGet('/api/user/'+viewingUser+'/media?viewer='+myU,function(d){if(d.posts&&d.posts.length)renderPosts(d.posts);else $('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No media posts</div>'})}
+
+// Suggested users
+function loadSuggested(){api('/api/suggested',{token:myTk},function(d){if(!d.users||!d.users.length){$('suggested-box').style.display='none';return}$('suggested-box').style.display='';var el=$('suggested-list');el.innerHTML='';for(var i=0;i<d.users.length;i++){var u=d.users[i];var div=document.createElement('div');div.className='user-row';var pfp=u.pfp?'<img src="'+u.pfp+'">':'';div.innerHTML=pfp+'<span style="color:'+(u.color||'#000')+';font-weight:bold;cursor:pointer" onclick="viewUser(\''+u.username+'\')">'+esc(u.displayName)+'</span> <span style="color:gray">@'+esc(u.username)+'</span> <span style="font-size:9px;color:gray">'+u.mutualCount+' mutual</span> <input type="button" class="B Bs" value="Follow" onclick="quickFollow(\''+u.username+'\',this)">';el.appendChild(div)}})}
+function quickFollow(un,btn){api('/api/follow',{token:myTk,username:un},function(d){if(!d.error)btn.value=d.following?'Unfollow':'Follow'})}
+
+// === BATCH 3 ===
+
+// For You feed
+function loadForYou(){api('/api/foryou',{token:myTk,before:oldestTs||Date.now()+1},function(d){if(d.posts&&d.posts.length){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}else $('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">Follow people to see what they like here</div>'})}
+
+// Post of the Day
+function loadPOTD(){apiGet('/api/post-of-the-day?viewer='+myU,function(d){if(d.post){$('potd').style.display='';var el=$('potd-content');el.innerHTML='';var tmp=$('feed');var oldFeed=tmp.innerHTML;renderPost(d.post);el.innerHTML=tmp.innerHTML;tmp.innerHTML=oldFeed}else $('potd').style.display='none'})}
+
+// Streak
+function loadStreak(un){apiGet('/api/streak/'+un,function(d){$('pv-streak').innerHTML=(d.streak||0)})}
+
+// Double-tap to like
+var lastTap={};
+function handleDoubleTap(postId,el){var now=Date.now();if(lastTap[postId]&&now-lastTap[postId]<400){if(!myTk){showAuth('li');return}// Show heart animation
+var heart=document.createElement('span');heart.className='dbl-heart';heart.innerHTML='&#9829;';var body=el.querySelector('.post-body');if(body){body.appendChild(heart);setTimeout(function(){if(heart.parentNode)heart.parentNode.removeChild(heart)},700)}api('/api/like',{token:myTk,postId:postId},function(d){if(!d.error&&d.liked===false){}else refreshFeed()});lastTap[postId]=0}else{lastTap[postId]=now}}
+
+// Keyboard shortcuts
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;
+  if(e.key==='n'||e.key==='N'){e.preventDefault();$('compose-text').focus();window.scrollTo(0,0)}
+  if(e.key==='/'||e.key==='s'){e.preventDefault();swTab('search');setTimeout(function(){$('search-q').focus()},100)}
+});
 
 // Lightbox
 function openLB(url){$('lb-img').src=url;$('lb').style.display='block'}
-
-// Init — show explore for non-logged-in users
-if(!localStorage.getItem('jg_token')){swTab('explore');$('main-tabs').style.display=''}
+document.onkeydown=function(e){if(e.keyCode===27){$('lb').style.display='none';closeModal();closeConfirm()}}
 </script>
 </body>
 </html>
