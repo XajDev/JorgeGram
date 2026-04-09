@@ -3,80 +3,314 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-<title>JorgeGram — jorgepompacarrera.com</title>
+<title>JorgeGram</title>
 <style>
-body{margin:0;padding:0;font-family:Tahoma,Verdana,Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
-body.xp-blue{background:#3a6ea5;color:#000}
-body.xp-silver{background:#7a96a8;color:#000}
-body.xp-olive{background:#7a8a5a;color:#000}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Tahoma,Verdana,Arial,sans-serif;font-size:12px}
+body.xp-blue{background:#3a6ea5}
+body.xp-silver{background:#7a96a8}
+body.xp-olive{background:#7a8a5a}
 body.dark{background:#1a1a2e;color:#c0c0c0}
-.nav{background:#ece9d8;border-bottom:2px groove #d4d0c8;padding:6px 12px;font-size:11px}
-.nav a{color:#0a246a;text-decoration:none;padding:3px 10px;margin-right:2px;border:1px solid #ece9d8}
-.nav a:hover{border:1px outset #d4d0c8;background:#d4d0c8}
-.nav a.cur{border:1px inset #d4d0c8;background:#fff;font-weight:bold}
-.nav b{color:#0a246a;margin-right:14px;font-size:13px}
-.main{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column}
-.main h1{font-size:48px;color:#0a246a;margin:0;letter-spacing:4px}
-.main p{font-size:14px;color:#666;margin-top:12px}
-.theme-bar{background:#ece9d8;border-top:2px groove #d4d0c8;padding:4px 12px;font-size:10px;text-align:right}
-.theme-bar span{cursor:pointer;padding:2px 8px;border:1px solid #d4d0c8;margin-left:2px}
-.theme-bar span:hover{background:#d4d0c8}
-.theme-bar span.on{background:#fff;font-weight:bold;border:1px inset #d4d0c8}
-body.dark .nav{background:#2a2a3e;border-color:#444}
-body.dark .nav a{color:#8080cc;border-color:#2a2a3e}
-body.dark .nav a:hover{background:#3a3a5e;border-color:#444}
-body.dark .nav a.cur{background:#1a1a2e;border-color:#444;color:#aaccff}
-body.dark .nav b{color:#8888cc}
-body.dark .main h1{color:#4a4a8e}
-body.dark .main p{color:#666}
-body.dark .theme-bar{background:#2a2a3e;border-color:#444}
-body.dark .theme-bar span{border-color:#444;color:#aaa}
-body.dark .theme-bar span:hover{background:#3a3a5e}
-body.dark .theme-bar span.on{background:#1a1a2e}
-body.xp-silver .nav{background:#e0e0e0;border-color:#b0b0b0}
-body.xp-silver .nav a{color:#4a6a7a;border-color:#e0e0e0}
-body.xp-silver .nav a:hover{background:#c8c8c8;border-color:#b0b0b0}
-body.xp-silver .nav a.cur{background:#fff;border-color:#b0b0b0}
-body.xp-silver .nav b{color:#4a6a7a}
-body.xp-silver .main h1{color:#4a6a7a}
-body.xp-silver .theme-bar{background:#e0e0e0;border-color:#b0b0b0}
-body.xp-silver .theme-bar span{border-color:#b0b0b0}
-body.xp-silver .theme-bar span.on{background:#fff}
-body.xp-olive .nav{background:#dde0c8;border-color:#a0a890}
-body.xp-olive .nav a{color:#4a5a2a;border-color:#dde0c8}
-body.xp-olive .nav a:hover{background:#c8ccb0;border-color:#a0a890}
-body.xp-olive .nav a.cur{background:#fafaf0;border-color:#a0a890}
-body.xp-olive .nav b{color:#4a5a2a}
-body.xp-olive .main h1{color:#4a5a2a}
-body.xp-olive .theme-bar{background:#dde0c8;border-color:#a0a890}
-body.xp-olive .theme-bar span{border-color:#a0a890}
-body.xp-olive .theme-bar span.on{background:#fafaf0}
+.wrap{max-width:620px;margin:0 auto}
+/* NAV */
+.nv{padding:6px 12px;font-size:11px;border-bottom:2px groove #d4d0c8;background:#ece9d8}
+.nv a{color:#0a246a;text-decoration:none;padding:3px 10px;border:1px solid #ece9d8;margin-right:2px}
+.nv a:hover{border:1px outset #d4d0c8;background:#d4d0c8}
+.nv a.c{border:1px inset #d4d0c8;background:#fff;font-weight:bold}
+.nv b{color:#0a246a;margin-right:12px;font-size:13px}
+.nv .r{float:right}
+/* PANELS */
+.R{border:2px outset #d4d0c8;background:#ece9d8}
+.S{border:2px inset #d4d0c8;background:#fff}
+.T{background:#0a246a;color:#fff;font-weight:bold;padding:3px 8px;font-size:11px}
+.B{font-family:Tahoma,Verdana,sans-serif;font-size:11px;border:2px outset #d4d0c8;background:#ece9d8;padding:2px 12px;cursor:pointer;color:#000}
+.B:active{border-style:inset}
+.Bs{font-size:10px;padding:1px 6px}
+.I{font-family:Tahoma,Verdana,sans-serif;font-size:12px;border:2px inset #d4d0c8;padding:4px;background:#fff;color:#000;width:100%;resize:none}
+.mp{background:#ece9d8}
+/* TABS */
+.tabs{padding:4px 0}
+.tab{display:inline-block;padding:4px 16px;cursor:pointer;border:2px outset #d4d0c8;background:#d4d0c8;font-size:11px;margin-right:2px}
+.tab.on{background:#ece9d8;border-bottom:2px solid #ece9d8;font-weight:bold}
+/* POST */
+.post{border:2px outset #d4d0c8;background:#ece9d8;margin:6px 0;padding:0}
+.post-head{padding:6px 8px;font-size:11px}
+.post-head img{width:28px;height:28px;border:1px solid #d4d0c8;object-fit:cover;vertical-align:middle;margin-right:6px}
+.post-dn{font-weight:bold;cursor:pointer}
+.post-dn:hover{text-decoration:underline}
+.post-un{color:gray;margin-left:4px}
+.post-time{color:gray;float:right;font-size:10px}
+.post-body{padding:4px 8px 8px;font-size:13px;word-wrap:break-word;line-height:1.4}
+.post-img{max-width:100%;max-height:400px;border:1px solid #d4d0c8;margin-top:6px;cursor:pointer}
+.post-actions{padding:4px 8px;border-top:1px groove #d4d0c8;font-size:10px}
+.post-actions span{display:inline-block;margin-right:16px;cursor:pointer;padding:2px 6px;border:1px solid transparent}
+.post-actions span:hover{border:1px outset #d4d0c8;background:#d4d0c8}
+.post-actions .active{font-weight:bold;color:#c00}
+.repost-label{padding:4px 8px;font-size:10px;color:gray;border-bottom:1px groove #d4d0c8}
+.reply-label{padding:4px 8px;font-size:10px;color:gray}
+.badge-tag{font-size:8px;padding:0 3px;border:1px solid #999;background:#ffe;color:#333;margin-left:2px}
+.char-count{float:right;font-size:10px;color:gray}
+.char-count.over{color:#c00;font-weight:bold}
+/* PROFILE */
+.prof-header{padding:12px;text-align:center}
+.prof-pfp{width:80px;height:80px;border:2px inset #d4d0c8;object-fit:cover}
+.prof-stats span{display:inline-block;margin:0 10px;text-align:center}
+.prof-stats b{display:block;font-size:14px}
+/* COMPOSE */
+.compose{margin:6px 0}
+/* LIGHTBOX */
+.lb-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:200;display:none;cursor:pointer;text-align:center}
+.lb-bg img{max-width:90vw;max-height:90vh;margin-top:5vh;border:3px outset #d4d0c8}
+/* MODAL */
+.mo-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:100;display:none}
+.mo-win{position:fixed;top:50%;left:50%;z-index:101;display:none;margin-top:-120px;margin-left:-160px;width:320px}
+/* DARK */
+body.dark .nv{background:#2a2a3e;border-color:#444}
+body.dark .nv a{color:#8080cc;border-color:#2a2a3e}
+body.dark .nv a:hover{background:#3a3a5e;border-color:#444}
+body.dark .nv a.c{background:#1a1a2e;border-color:#444;color:#aaccff}
+body.dark .nv b{color:#8888cc}
+body.dark .R{border-color:#444;background:#2a2a3e}
+body.dark .S{border-color:#444;background:#1a1a2e;color:#c0c0c0}
+body.dark .T{background:#1a1a3e;color:#c0c0e0}
+body.dark .B{border-color:#444;background:#2a2a3e;color:#c0c0c0}
+body.dark .I{border-color:#444;background:#1a1a2e;color:#c0c0c0}
+body.dark .mp{background:#2a2a3e}
+body.dark .post{border-color:#444;background:#2a2a3e}
+body.dark .post-actions{border-color:#444}
+body.dark .post-actions span:hover{border-color:#555;background:#3a3a5e}
+body.dark .tab{border-color:#444;background:#2a2a3e;color:#aaa}
+body.dark .tab.on{background:#2a2a3e;border-bottom-color:#2a2a3e;color:#c0c0e0}
+body.dark .post-img{border-color:#444}
+body.dark .repost-label{border-color:#444}
+body.dark .reply-label{color:#888}
+body.dark .badge-tag{background:#2a2a3e;border-color:#555;color:#aaa}
+body.dark a{color:#6688cc}
+/* SILVER */
+body.xp-silver .nv{background:#e0e0e0;border-color:#b0b0b0}
+body.xp-silver .nv a{color:#4a6a7a;border-color:#e0e0e0}
+body.xp-silver .nv b{color:#4a6a7a}
+body.xp-silver .R{border-color:#b0b0b0;background:#e8e8e8}
+body.xp-silver .post{border-color:#b0b0b0;background:#e8e8e8}
+body.xp-silver .T{background:#5a7a8a}
+body.xp-silver .B{border-color:#b0b0b0;background:#e0e0e0}
+body.xp-silver .I{border-color:#b0b0b0}
+body.xp-silver .mp{background:#e8e8e8}
+/* OLIVE */
+body.xp-olive .nv{background:#dde0c8;border-color:#a0a890}
+body.xp-olive .nv a{color:#4a5a2a;border-color:#dde0c8}
+body.xp-olive .nv b{color:#4a5a2a}
+body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}
+body.xp-olive .post{border-color:#a0a890;background:#e8e8d8}
+body.xp-olive .T{background:#5a6a3a}
+body.xp-olive .B{border-color:#a0a890;background:#dde0c8}
+body.xp-olive .I{border-color:#a0a890}
+body.xp-olive .mp{background:#e8e8d8}
 </style>
 </head>
 <body class="xp-blue">
-<div class="nav">
+
+<!-- NAV -->
+<div class="nv">
   <b>JorgeGram</b>
   <a href="https://jorgepompacarrera.com">.com</a>
   <a href="https://jorgepompacarrera.net">.net</a>
   <a href="https://jorgepompacarrera.org">.org</a>
-  <a href="https://jorgepompacarrera.info" class="cur">.info</a>
+  <a href="https://jorgepompacarrera.info" class="c">.info</a>
+  <span class="r" id="nav-auth">
+    <input type="button" class="B Bs" value="Sign In" onclick="showAuth('li')">
+    <input type="button" class="B Bs" value="Register" onclick="showAuth('re')">
+  </span>
+  <span class="r" id="nav-user" style="display:none">
+    <b id="nav-dn"></b>
+    <input type="button" class="B Bs" value="Settings" onclick="showSettings()">
+    <input type="button" class="B Bs" value="Logout" onclick="doLogout()">
+  </span>
 </div>
-<div class="main">
-  <h1>coming soon...</h1>
-  <p>JorgeGram</p>
+
+<div class="wrap">
+  <!-- TAB BAR -->
+  <div class="tabs" id="main-tabs" style="display:none">
+    <span class="tab on" onclick="swTab('timeline',this)">Timeline</span>
+    <span class="tab" onclick="swTab('explore',this)">Explore</span>
+    <span class="tab" onclick="swTab('search',this)">Search</span>
+    <span class="tab" onclick="swTab('myprofile',this)">Profile</span>
+  </div>
+
+  <!-- COMPOSE BOX -->
+  <div id="compose-box" class="compose R" style="display:none">
+    <div class="T">New Post</div>
+    <div class="mp" style="padding:8px">
+      <textarea class="I" id="compose-text" rows="3" maxlength="280" placeholder="What's happening?" oninput="updateCharCount()"></textarea>
+      <div><span class="char-count" id="char-count">280</span>
+        <input type="file" id="compose-img" accept="image/*" style="font-size:10px;margin-top:4px">
+        <input type="button" class="B" value="Post" onclick="submitPost()" style="float:right;margin-top:4px">
+      </div>
+      <div id="compose-reply" style="display:none;font-size:10px;color:gray;margin-top:4px">Replying to <b id="reply-to-name"></b> <span style="color:#c00;cursor:pointer" onclick="cancelReply()">[cancel]</span></div>
+    </div>
+  </div>
+
+  <!-- SEARCH BAR -->
+  <div id="search-bar" class="R" style="display:none;margin:6px 0;padding:8px">
+    <input class="I" id="search-q" placeholder="Search posts..." style="width:80%"> <input type="button" class="B" value="Search" onclick="doSearch()">
+  </div>
+
+  <!-- PROFILE VIEW -->
+  <div id="profile-view" style="display:none">
+    <div class="R prof-header" id="prof-box">
+      <img class="prof-pfp" id="pv-pfp" src=""><br>
+      <b id="pv-dn" style="font-size:16px"></b> <span id="pv-badges"></span><br>
+      <span style="color:gray" id="pv-un"></span><br>
+      <div id="pv-bio" style="margin:6px 0;font-size:12px"></div>
+      <div class="prof-stats">
+        <span><b id="pv-posts">0</b>Posts</span>
+        <span><b id="pv-followers">0</b>Followers</span>
+        <span><b id="pv-following">0</b>Following</span>
+      </div>
+      <div style="margin-top:6px"><input type="button" class="B" id="pv-follow-btn" value="Follow" onclick="toggleFollow()"></div>
+    </div>
+  </div>
+
+  <!-- FEED -->
+  <div id="feed"></div>
+  <div id="load-more" style="text-align:center;padding:12px;display:none">
+    <input type="button" class="B" value="Load More" onclick="loadMore()">
+  </div>
 </div>
-<div class="theme-bar">
-  Theme:
-  <span class="on" onclick="setTheme('xp-blue',this)">XP Blue</span>
-  <span onclick="setTheme('xp-silver',this)">XP Silver</span>
-  <span onclick="setTheme('xp-olive',this)">XP Olive</span>
-  <span onclick="setTheme('dark',this)">Dark</span>
+
+<!-- AUTH MODAL -->
+<div class="mo-bg" id="mo-bg" onclick="closeModal()"></div>
+<div class="mo-win R" id="mo-auth">
+  <div class="T" id="auth-title">Sign In</div>
+  <div class="mp" style="padding:16px">
+    <div id="auth-li">
+      <table cellspacing="4"><tr><td>Username:</td><td><input class="I" id="li-u" style="width:180px" maxlength="24"></td></tr>
+      <tr><td>Password:</td><td><input type="password" class="I" id="li-p" style="width:180px"></td></tr>
+      <tr><td></td><td><input type="button" class="B" value="Sign In >>" onclick="doLogin()"></td></tr>
+      <tr><td></td><td><div id="li-e" style="color:#f00;font-size:10px"></div></td></tr></table>
+    </div>
+    <div id="auth-re" style="display:none">
+      <table cellspacing="4"><tr><td>Username:</td><td><input class="I" id="re-u" style="width:180px" maxlength="24"></td></tr>
+      <tr><td>Display:</td><td><input class="I" id="re-d" style="width:180px" maxlength="24"></td></tr>
+      <tr><td>Password:</td><td><input type="password" class="I" id="re-p" style="width:180px"></td></tr>
+      <tr><td></td><td><input type="button" class="B" value="Create Account >>" onclick="doRegister()"></td></tr>
+      <tr><td></td><td><div id="re-e" style="color:#f00;font-size:10px"></div></td></tr></table>
+    </div>
+    <div style="margin-top:8px;font-size:10px"><a href="#" id="auth-switch" onclick="toggleAuthMode();return false">Need an account? Register</a></div>
+  </div>
 </div>
+
+<!-- SETTINGS MODAL -->
+<div class="mo-win R" id="mo-set" style="width:340px;margin-left:-170px">
+  <div class="T">Settings</div>
+  <div class="mp" style="padding:16px">
+    <b>Theme:</b><br>
+    <select class="I" id="s-theme" style="width:180px">
+      <option value="xp-blue">XP Blue</option><option value="xp-silver">XP Silver</option><option value="xp-olive">XP Olive</option><option value="dark">Dark</option>
+    </select> <input type="button" class="B Bs" value="Apply" onclick="applyTheme()"><br><br>
+    <div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb-bg" id="lb" onclick="this.style.display='none'"><img id="lb-img" src=""></div>
+
 <script>
-function setTheme(t,el){document.body.className=t;localStorage.setItem('jorge-theme',t);var s=el.parentNode.getElementsByTagName('span');for(var i=0;i<s.length;i++)s[i].className='';el.className='on'}
-var saved=localStorage.getItem('jorge-theme');if(saved)document.body.className=saved;
-window.onload=function(){var t=document.body.className||'xp-blue';var spans=document.querySelectorAll('.theme-bar span');for(var i=0;i<spans.length;i++){spans[i].className='';if(spans[i].textContent.toLowerCase().replace(/ /g,'-').replace('xp-','xp-')===t||
-(t==='xp-blue'&&spans[i].textContent==='XP Blue')||(t==='xp-silver'&&spans[i].textContent==='XP Silver')||(t==='xp-olive'&&spans[i].textContent==='XP Olive')||(t==='dark'&&spans[i].textContent==='Dark'))spans[i].className='on'}}
+var myU='',myDN='',myCol='',myTk='',myTheme='xp-blue',curTab='explore',curFeed=[],replyTo=null,viewingUser='',oldestTs=null;
+function $(id){return document.getElementById(id)}
+function api(u,b,c){fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()}).then(c).catch(function(){c({error:'Connection error'})})}
+function apiGet(u,c){fetch(u).then(function(r){return r.json()}).then(c).catch(function(){c({error:'err'})})}
+function esc(t){if(!t)return'';var d=document.createElement('div');d.appendChild(document.createTextNode(t));return d.innerHTML}
+function timeAgo(ts){var d=Date.now()-parseInt(ts);if(d<60000)return'just now';if(d<3600000)return Math.floor(d/60000)+'m';if(d<86400000)return Math.floor(d/3600000)+'h';return Math.floor(d/86400000)+'d'}
+
+// Theme
+var saved=localStorage.getItem('jorge-theme');if(saved){document.body.className=saved;myTheme=saved}
+function applyTheme(){var t=$('s-theme').value;document.body.className=t;myTheme=t;localStorage.setItem('jorge-theme',t)}
+function showSettings(){$('s-theme').value=myTheme;$('mo-bg').style.display='block';$('mo-set').style.display='block'}
+
+// Auth
+window.onload=function(){var tk=localStorage.getItem('jg_token');if(tk){api('/api/auth',{token:tk},function(d){if(!d.error){myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;loggedIn()}else{localStorage.removeItem('jg_token')}})}else{swTab('explore')}}
+function showAuth(mode){$('mo-bg').style.display='block';$('mo-auth').style.display='block';if(mode==='re'){$('auth-li').style.display='none';$('auth-re').style.display='';$('auth-title').innerHTML='Register';$('auth-switch').innerHTML='Have an account? Sign in'}else{$('auth-li').style.display='';$('auth-re').style.display='none';$('auth-title').innerHTML='Sign In';$('auth-switch').innerHTML='Need an account? Register'}}
+function toggleAuthMode(){if($('auth-li').style.display==='none')showAuth('li');else showAuth('re')}
+function closeModal(){$('mo-bg').style.display='none';$('mo-auth').style.display='none';$('mo-set').style.display='none'}
+function doLogin(){var u=$('li-u').value,p=$('li-p').value;if(!u||!p){$('li-e').innerHTML='Fill both fields';return}api('/api/login',{username:u,password:p},function(d){if(d.error){$('li-e').innerHTML=esc(d.error)}else{myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
+function doRegister(){var u=$('re-u').value,d=$('re-d').value,p=$('re-p').value;if(!u||!d||!p){$('re-e').innerHTML='Fill all fields';return}api('/api/register',{username:u,displayName:d,password:p},function(r){if(r.error){$('re-e').innerHTML=esc(r.error)}else{myU=r.username;myDN=r.displayName;myCol=r.color;myTk=r.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
+$('li-u').onkeydown=$('li-p').onkeydown=function(e){if(e.keyCode===13)doLogin()};
+$('re-u').onkeydown=$('re-d').onkeydown=$('re-p').onkeydown=function(e){if(e.keyCode===13)doRegister()};
+function doLogout(){localStorage.removeItem('jg_token');location.reload()}
+function loggedIn(){$('nav-auth').style.display='none';$('nav-user').style.display='';$('nav-dn').innerHTML=esc(myDN);$('main-tabs').style.display='';$('compose-box').style.display='';swTab('timeline')}
+
+// Tabs
+function swTab(tab,el){curTab=tab;$('feed').innerHTML='';oldestTs=null;$('search-bar').style.display=tab==='search'?'':'none';$('profile-view').style.display=tab==='myprofile'||tab==='userprofile'?'':'none';$('compose-box').style.display=(myTk&&tab!=='search')?'':'none';if(el){var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';el.className='tab on'}if(tab==='timeline')loadTimeline();else if(tab==='explore')loadExplore();else if(tab==='myprofile'){viewingUser=myU;loadProfile(myU)}else if(tab==='userprofile')loadProfile(viewingUser)}
+function loadTimeline(){api('/api/timeline',{token:myTk,before:oldestTs||Date.now()+1},function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
+function loadExplore(){api('/api/explore',{token:myTk,before:oldestTs||Date.now()+1},function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
+function loadMore(){if(curTab==='timeline')loadTimeline();else if(curTab==='explore')loadExplore();else if(curTab==='userprofile'||curTab==='myprofile')loadUserPosts()}
+function loadProfile(un){viewingUser=un;$('profile-view').style.display='';apiGet('/api/profile/'+un+'?viewer='+myU,function(d){if(d.error)return;$('pv-dn').innerHTML=esc(d.displayName);$('pv-dn').style.color=d.color;$('pv-un').innerHTML='@'+esc(d.username);$('pv-bio').innerHTML=esc(d.bio||'');if(d.pfp){$('pv-pfp').src=d.pfp;$('pv-pfp').style.display=''}else $('pv-pfp').style.display='none';var badges='';if(d.badges)for(var i=0;i<d.badges.length;i++)badges+='<span class="badge-tag">'+esc(d.badges[i])+'</span>';$('pv-badges').innerHTML=badges;$('pv-posts').innerHTML=d.postCount;$('pv-followers').innerHTML=d.followerCount;$('pv-following').innerHTML=d.followingCount;if(un===myU){$('pv-follow-btn').style.display='none'}else{$('pv-follow-btn').style.display='';$('pv-follow-btn').value=d.isFollowing?'Unfollow':'Follow'}});$('feed').innerHTML='';oldestTs=null;loadUserPosts()}
+function loadUserPosts(){apiGet('/api/user/'+viewingUser+'/posts?viewer='+myU+'&before='+(oldestTs||Date.now()+1),function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
+function toggleFollow(){api('/api/follow',{token:myTk,username:viewingUser},function(d){if(!d.error){$('pv-follow-btn').value=d.following?'Unfollow':'Follow';loadProfile(viewingUser)}})}
+
+// Render posts
+function renderPosts(posts){for(var i=0;i<posts.length;i++){var p=posts[i];if(p.created_at)oldestTs=parseInt(p.created_at);renderPost(p)}}
+function renderPost(p){
+  var div=document.createElement('div');div.className='post';div.id='post-'+p.id;
+  var html='';
+  // Repost label
+  if(p.repost_of&&p.original){html+='<div class="repost-label">&#x1f501; '+esc(p.display_name)+' reposted</div>';p=p.original}
+  // Reply label
+  if(p.reply_to){html+='<div class="reply-label">Replying to a post</div>'}
+  // Header
+  var pfp=p.pfp?'<img src="'+p.pfp+'">':'';
+  var badges='';if(p.badges)for(var j=0;j<p.badges.length;j++)badges+='<span class="badge-tag">'+esc(p.badges[j])+'</span>';
+  html+='<div class="post-head">'+pfp+'<span class="post-dn" style="color:'+(p.color||'#000')+'" onclick="viewUser(\''+p.username+'\')">'+esc(p.display_name)+'</span>'+badges+'<span class="post-un">@'+esc(p.username)+'</span><span class="post-time">'+timeAgo(p.created_at)+'</span></div>';
+  // Body
+  html+='<div class="post-body">'+formatPostText(p.text);
+  if(p.image_url)html+='<br><img class="post-img" src="'+p.image_url+'" onclick="openLB(\''+p.image_url+'\')">';
+  if(p.gif_url)html+='<br><img class="post-img" src="'+p.gif_url+'" onclick="openLB(\''+p.gif_url+'\')">';
+  html+='</div>';
+  // Actions
+  var likeClass=p.liked?'active':'';
+  var repostClass=p.reposted?'active':'';
+  html+='<div class="post-actions">';
+  html+='<span onclick="doLike(\''+p.id+'\')" class="'+likeClass+'">&#9829; '+p.like_count+'</span>';
+  html+='<span onclick="doRepost(\''+p.id+'\')" class="'+repostClass+'">&#x1f501; '+p.repost_count+'</span>';
+  html+='<span onclick="startReply(\''+p.id+'\',\''+esc(p.display_name)+'\')">&#x1f4ac; '+p.reply_count+'</span>';
+  html+='<span onclick="viewThread(\''+p.id+'\')">View</span>';
+  if(p.username===myU)html+='<span onclick="deletePost(\''+p.id+'\')">Delete</span>';
+  html+='</div>';
+  div.innerHTML=html;$('feed').appendChild(div);
+}
+function formatPostText(text){if(!text)return'';var h=esc(text);h=h.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color:#0000ff">$1</a>');h=h.replace(/@([a-zA-Z0-9_]+)/g,'<span style="color:#0000ff;cursor:pointer" onclick="viewUser(\'$1\')">@$1</span>');return h}
+
+// Actions
+function doLike(id){api('/api/like',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
+function doRepost(id){api('/api/repost',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
+function deletePost(id){if(!confirm('Delete?'))return;api('/api/delete-post',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})}
+function refreshFeed(){$('feed').innerHTML='';oldestTs=null;if(curTab==='timeline')loadTimeline();else if(curTab==='explore')loadExplore();else if(curTab==='myprofile'||curTab==='userprofile')loadUserPosts()}
+
+// Compose
+function updateCharCount(){var remaining=280-$('compose-text').value.length;$('char-count').innerHTML=remaining;$('char-count').className=remaining<0?'char-count over':'char-count'}
+function startReply(postId,name){replyTo=postId;$('compose-reply').style.display='';$('reply-to-name').innerHTML=esc(name);$('compose-text').focus();window.scrollTo(0,0)}
+function cancelReply(){replyTo=null;$('compose-reply').style.display='none'}
+function submitPost(){var text=$('compose-text').value.trim();var imgFile=$('compose-img').files[0];if(!text&&!imgFile){alert('Write something');return}
+  if(imgFile){var fd=new FormData();fd.append('image',imgFile);fd.append('token',myTk);fetch('/api/upload-image',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(d){if(d.url)createPost(text,d.url,null);else alert(d.error||'Upload failed')})}
+  else createPost(text,null,null)}
+function createPost(text,imageUrl,gifUrl){api('/api/post',{token:myTk,text:text,imageUrl:imageUrl,gifUrl:gifUrl,replyTo:replyTo},function(d){if(d.error){alert(d.error)}else{$('compose-text').value='';$('compose-img').value='';cancelReply();updateCharCount();refreshFeed()}})}
+
+// View user profile
+function viewUser(un){viewingUser=un;curTab='userprofile';$('profile-view').style.display='';$('search-bar').style.display='none';$('feed').innerHTML='';oldestTs=null;loadProfile(un);var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab'}
+
+// View thread (single post + replies)
+function viewThread(id){$('feed').innerHTML='';$('profile-view').style.display='none';$('search-bar').style.display='none';oldestTs=null;curTab='thread';var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';apiGet('/api/post/'+id+'?viewer='+myU,function(d){if(d.error)return;renderPost(d.post);if(d.replies)for(var i=0;i<d.replies.length;i++)renderPost(d.replies[i]);$('load-more').style.display='none'})}
+
+// Search
+function doSearch(){var q=$('search-q').value.trim();if(!q)return;$('feed').innerHTML='';apiGet('/api/search?q='+encodeURIComponent(q)+'&viewer='+myU,function(d){if(d.posts)for(var i=0;i<d.posts.length;i++)renderPost(d.posts[i]);if(!d.posts||!d.posts.length)$('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No results</div>'})}
+$('search-q').onkeydown=function(e){if(e.keyCode===13)doSearch()};
+
+// Lightbox
+function openLB(url){$('lb-img').src=url;$('lb').style.display='block'}
+
+// Init — show explore for non-logged-in users
+if(!localStorage.getItem('jg_token')){swTab('explore');$('main-tabs').style.display=''}
 </script>
 </body>
 </html>
