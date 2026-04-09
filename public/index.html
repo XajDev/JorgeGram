@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<title>JorgeGram — jorgepompacarrera.com</title>
+<style>
+body{margin:0;padding:0;font-family:Tahoma,Verdana,Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+body.xp-blue{background:#3a6ea5;color:#000}
+body.xp-silver{background:#7a96a8;color:#000}
+body.xp-olive{background:#7a8a5a;color:#000}
+body.dark{background:#1a1a2e;color:#c0c0c0}
+.nav{background:#ece9d8;border-bottom:2px groove #d4d0c8;padding:6px 12px;font-size:11px}
+.nav a{color:#0a246a;text-decoration:none;padding:3px 10px;margin-right:2px;border:1px solid #ece9d8}
+.nav a:hover{border:1px outset #d4d0c8;background:#d4d0c8}
+.nav a.cur{border:1px inset #d4d0c8;background:#fff;font-weight:bold}
+.nav b{color:#0a246a;margin-right:14px;font-size:13px}
+.main{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.main h1{font-size:48px;color:#0a246a;margin:0;letter-spacing:4px}
+.main p{font-size:14px;color:#666;margin-top:12px}
+.theme-bar{background:#ece9d8;border-top:2px groove #d4d0c8;padding:4px 12px;font-size:10px;text-align:right}
+.theme-bar span{cursor:pointer;padding:2px 8px;border:1px solid #d4d0c8;margin-left:2px}
+.theme-bar span:hover{background:#d4d0c8}
+.theme-bar span.on{background:#fff;font-weight:bold;border:1px inset #d4d0c8}
+body.dark .nav{background:#2a2a3e;border-color:#444}
+body.dark .nav a{color:#8080cc;border-color:#2a2a3e}
+body.dark .nav a:hover{background:#3a3a5e;border-color:#444}
+body.dark .nav a.cur{background:#1a1a2e;border-color:#444;color:#aaccff}
+body.dark .nav b{color:#8888cc}
+body.dark .main h1{color:#4a4a8e}
+body.dark .main p{color:#666}
+body.dark .theme-bar{background:#2a2a3e;border-color:#444}
+body.dark .theme-bar span{border-color:#444;color:#aaa}
+body.dark .theme-bar span:hover{background:#3a3a5e}
+body.dark .theme-bar span.on{background:#1a1a2e}
+body.xp-silver .nav{background:#e0e0e0;border-color:#b0b0b0}
+body.xp-silver .nav a{color:#4a6a7a;border-color:#e0e0e0}
+body.xp-silver .nav a:hover{background:#c8c8c8;border-color:#b0b0b0}
+body.xp-silver .nav a.cur{background:#fff;border-color:#b0b0b0}
+body.xp-silver .nav b{color:#4a6a7a}
+body.xp-silver .main h1{color:#4a6a7a}
+body.xp-silver .theme-bar{background:#e0e0e0;border-color:#b0b0b0}
+body.xp-silver .theme-bar span{border-color:#b0b0b0}
+body.xp-silver .theme-bar span.on{background:#fff}
+body.xp-olive .nav{background:#dde0c8;border-color:#a0a890}
+body.xp-olive .nav a{color:#4a5a2a;border-color:#dde0c8}
+body.xp-olive .nav a:hover{background:#c8ccb0;border-color:#a0a890}
+body.xp-olive .nav a.cur{background:#fafaf0;border-color:#a0a890}
+body.xp-olive .nav b{color:#4a5a2a}
+body.xp-olive .main h1{color:#4a5a2a}
+body.xp-olive .theme-bar{background:#dde0c8;border-color:#a0a890}
+body.xp-olive .theme-bar span{border-color:#a0a890}
+body.xp-olive .theme-bar span.on{background:#fafaf0}
+</style>
+</head>
+<body class="xp-blue">
+<div class="nav">
+  <b>JorgeGram</b>
+  <a href="https://jorgepompacarrera.com">.com</a>
+  <a href="https://jorgepompacarrera.net">.net</a>
+  <a href="https://jorgepompacarrera.org">.org</a>
+  <a href="https://jorgepompacarrera.info" class="cur">.info</a>
+</div>
+<div class="main">
+  <h1>coming soon...</h1>
+  <p>JorgeGram</p>
+</div>
+<div class="theme-bar">
+  Theme:
+  <span class="on" onclick="setTheme('xp-blue',this)">XP Blue</span>
+  <span onclick="setTheme('xp-silver',this)">XP Silver</span>
+  <span onclick="setTheme('xp-olive',this)">XP Olive</span>
+  <span onclick="setTheme('dark',this)">Dark</span>
+</div>
+<script>
+function setTheme(t,el){document.body.className=t;localStorage.setItem('jorge-theme',t);var s=el.parentNode.getElementsByTagName('span');for(var i=0;i<s.length;i++)s[i].className='';el.className='on'}
+var saved=localStorage.getItem('jorge-theme');if(saved)document.body.className=saved;
+window.onload=function(){var t=document.body.className||'xp-blue';var spans=document.querySelectorAll('.theme-bar span');for(var i=0;i<spans.length;i++){spans[i].className='';if(spans[i].textContent.toLowerCase().replace(/ /g,'-').replace('xp-','xp-')===t||
+(t==='xp-blue'&&spans[i].textContent==='XP Blue')||(t==='xp-silver'&&spans[i].textContent==='XP Silver')||(t==='xp-olive'&&spans[i].textContent==='XP Olive')||(t==='dark'&&spans[i].textContent==='Dark'))spans[i].className='on'}}
+</script>
+</body>
+</html>
