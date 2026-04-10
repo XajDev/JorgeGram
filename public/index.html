@@ -115,6 +115,7 @@ body.dark .toast{background:#2a2a3e;border-color:#444;color:#c0c0c0}
     <input type="button" class="B Bs" value="Settings" onclick="showSettings()">
     <input type="button" class="B Bs" id="admin-btn" value="Admin" onclick="openAdmin()" style="display:none">
     <input type="button" class="B Bs" value="Logout" onclick="doLogout()">
+    <input type="button" class="B Bs" value="&#8645;" onclick="showAccSwitcher()" title="Switch account">
   </span>
 </div>
 <div class="wrap">
@@ -353,6 +354,13 @@ body.dark .toast{background:#2a2a3e;border-color:#444;color:#c0c0c0}
 
 <script>
 var myU='',myDN='',myCol='',myTk='',myTheme='xp-blue',myAdmin=false,curTab='explore',replyTo=null,quoteOf=null,viewingUser='',oldestTs=null,selectedGif=null;
+
+// Multi-account manager
+function getAccounts(){try{return JSON.parse(localStorage.getItem('jg_accounts')||'[]')}catch(e){return[]}}
+function saveAccounts(accs){localStorage.setItem('jg_accounts',JSON.stringify(accs))}
+function addAccount(username,displayName,token){var accs=getAccounts();var idx=accs.findIndex(function(a){return a.username===username});if(idx>=0){accs[idx].token=token;accs[idx].displayName=displayName}else{accs.push({username:username,displayName:displayName,token:token})}saveAccounts(accs);localStorage.setItem('jg_token',token)}
+function removeAccount(username){var accs=getAccounts().filter(function(a){return a.username!==username});saveAccounts(accs)}
+function switchAccount(token){localStorage.setItem('jg_token',token);location.reload()}
 function $(id){return document.getElementById(id)}
 function api(u,b,c){fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()}).then(c).catch(function(){c({error:'err'})})}
 function apiGet(u,c){fetch(u).then(function(r){return r.json()}).then(c).catch(function(){c({error:'err'})})}
@@ -379,11 +387,11 @@ function handleRoute(p){if(p.startsWith('/post/')){var id=p.split('/post/')[1];i
 function showAuth(mode){$('mo-bg').style.display='block';$('mo-auth').style.display='block';if(mode==='re'){$('auth-li').style.display='none';$('auth-re').style.display='';$('auth-title').innerHTML='Register';$('auth-switch').innerHTML='Have account? Sign in'}else{$('auth-li').style.display='';$('auth-re').style.display='none';$('auth-title').innerHTML='Sign In';$('auth-switch').innerHTML='Need account? Register'}}
 function toggleAuthMode(){if($('auth-li').style.display==='none')showAuth('li');else showAuth('re')}
 function closeModal(){$('mo-bg').style.display='none';$('mo-auth').style.display='none';$('mo-set').style.display='none';$('mo-likes').style.display='none';$('mo-admin').style.display='none';$('mo-schedpost').style.display='none';$('mo-analytics').style.display='none';$('mo-templates').style.display='none';$('mo-lists').style.display='none';$('mo-listview').style.display='none'}
-function doLogin(){var u=$('li-u').value,p=$('li-p').value;if(!u||!p){$('li-e').innerHTML='Fill both';return}api('/api/login',{username:u,password:p},function(d){if(d.error)$('li-e').innerHTML=esc(d.error);else{myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
-function doRegister(){var u=$('re-u').value,d=$('re-d').value,p=$('re-p').value;if(!u||!d||!p){$('re-e').innerHTML='Fill all';return}api('/api/register',{username:u,displayName:d,password:p},function(r){if(r.error)$('re-e').innerHTML=esc(r.error);else{myU=r.username;myDN=r.displayName;myCol=r.color;myTk=r.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
+function doLogin(){var u=$('li-u').value,p=$('li-p').value;if(!u||!p){$('li-e').innerHTML='Fill both';return}api('/api/login',{username:u,password:p},function(d){if(d.error)$('li-e').innerHTML=esc(d.error);else{myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;myAdmin=d.isAdmin;addAccount(d.username,d.displayName,d.token);closeModal();loggedIn()}})}
+function doRegister(){var u=$('re-u').value,d=$('re-d').value,p=$('re-p').value;if(!u||!d||!p){$('re-e').innerHTML='Fill all';return}api('/api/register',{username:u,displayName:d,password:p},function(r){if(r.error)$('re-e').innerHTML=esc(r.error);else{myU=r.username;myDN=r.displayName;myCol=r.color;myTk=r.token;addAccount(r.username,r.displayName,r.token);closeModal();loggedIn()}})}
 $('li-u').onkeydown=$('li-p').onkeydown=function(e){if(e.keyCode===13)doLogin()};
 $('re-u').onkeydown=$('re-d').onkeydown=$('re-p').onkeydown=function(e){if(e.keyCode===13)doRegister()};
-function doLogout(){localStorage.removeItem('jg_token');location.reload()}
+function doLogout(){removeAccount(myU);localStorage.removeItem('jg_token');location.reload()}
 function loggedIn(){$('nav-auth').style.display='none';$('nav-user').style.display='';$('nav-dn').innerHTML=esc(myDN);$('main-tabs').style.display='';$('compose-box').style.display='';if(myAdmin)$('admin-btn').style.display='';swTab('timeline');pollNotifs()}
 
 // Notification polling
@@ -632,6 +640,10 @@ function loadQOTD(){apiGet('/api/quote-of-the-day',function(d){if(d.quote){$('qo
 
 // Admin: add quote
 function addQuote(){var t=$('adm-qt').value.trim(),a=$('adm-qa').value.trim();if(!t){$('adm-qe').innerHTML='<span style="color:#c00">Text required</span>';return}api('/api/admin/add-quote',{token:myTk,text:t,author:a},function(d){if(d.error)$('adm-qe').innerHTML='<span style="color:#c00">'+esc(d.error)+'</span>';else{$('adm-qe').innerHTML='<span style="color:green">Added!</span>';$('adm-qt').value='';$('adm-qa').value=''}})}
+
+// Account switcher
+function showAccSwitcher(){var accs=getAccounts();if(accs.length<=1){toast('No other accounts saved','err');return}var html='<div style="position:fixed;top:30px;right:10px;z-index:400;border:2px outset #d4d0c8;background:#ece9d8;padding:6px;font-size:11px" id="acc-switcher">';html+='<b>Switch Account</b><br>';for(var i=0;i<accs.length;i++){var a=accs[i];html+='<div style="padding:3px 0;cursor:pointer'+(a.username===myU?';font-weight:bold':'')+'" onclick="switchAccount(\''+esc(a.token)+'\')">'+(a.username===myU?'&#9679; ':'&#9675; ')+esc(a.displayName)+' ('+esc(a.username)+')</div>'}html+='<div style="padding:3px 0;cursor:pointer;color:#0a246a" onclick="closeAccSwitcher();showAuth(\'li\')">+ Add account</div>';html+='<div style="padding:3px 0;cursor:pointer;color:gray" onclick="closeAccSwitcher()">Cancel</div></div>';document.body.insertAdjacentHTML('beforeend',html)}
+function closeAccSwitcher(){var el=$('acc-switcher');if(el)el.parentNode.removeChild(el)}
 
 // Lightbox
 function openLB(url){$('lb-img').src=url;$('lb').style.display='block'}
