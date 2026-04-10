@@ -119,6 +119,90 @@ async function initDB() {
     old_text TEXT, new_text TEXT, edited_at BIGINT NOT NULL
   )`);
 
+  // Pinned posts on profiles
+  try { await pool.query("ALTER TABLE posts ADD COLUMN IF NOT EXISTS pinned BOOLEAN DEFAULT false"); } catch(e) {}
+
+  // Reports
+  await pool.query(`CREATE TABLE IF NOT EXISTS reports (
+    id TEXT PRIMARY KEY,
+    reporter TEXT NOT NULL REFERENCES accounts(username),
+    post_id TEXT REFERENCES posts(id) ON DELETE CASCADE,
+    reason TEXT DEFAULT '',
+    status TEXT DEFAULT 'pending',
+    created_at BIGINT NOT NULL
+  )`);
+
+  // Scheduled posts
+  await pool.query(`CREATE TABLE IF NOT EXISTS scheduled_posts (
+    id TEXT PRIMARY KEY,
+    username TEXT NOT NULL REFERENCES accounts(username),
+    text TEXT DEFAULT '',
+    image_url TEXT, gif_url TEXT,
+    send_at BIGINT NOT NULL,
+    sent BOOLEAN DEFAULT false,
+    created_at BIGINT NOT NULL
+  )`);
+
+  // Multiple images per post (carousel)
+  await pool.query(`CREATE TABLE IF NOT EXISTS post_images (
+    id TEXT PRIMARY KEY,
+    post_id TEXT NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+    url TEXT NOT NULL,
+    position INT DEFAULT 0
+  )`);
+
+  // User lists (like Twitter lists)
+  await pool.query(`CREATE TABLE IF NOT EXISTS user_lists (
+    id TEXT PRIMARY KEY,
+    owner TEXT NOT NULL REFERENCES accounts(username),
+    name TEXT NOT NULL,
+    description TEXT DEFAULT '',
+    private BOOLEAN DEFAULT false,
+    created_at BIGINT NOT NULL
+  )`);
+  await pool.query(`CREATE TABLE IF NOT EXISTS list_members (
+    list_id TEXT NOT NULL REFERENCES user_lists(id) ON DELETE CASCADE,
+    username TEXT NOT NULL REFERENCES accounts(username),
+    added_at BIGINT DEFAULT 0,
+    PRIMARY KEY (list_id, username)
+  )`);
+
+  // Post templates
+  await pool.query(`CREATE TABLE IF NOT EXISTS post_templates (
+    id TEXT PRIMARY KEY,
+    username TEXT NOT NULL REFERENCES accounts(username),
+    name TEXT NOT NULL,
+    text TEXT DEFAULT '',
+    created_at BIGINT NOT NULL
+  )`);
+
+  // Comments (threaded, separate from replies)
+  await pool.query(`CREATE TABLE IF NOT EXISTS comments (
+    id TEXT PRIMARY KEY,
+    post_id TEXT NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+    parent_id TEXT,
+    username TEXT NOT NULL REFERENCES accounts(username),
+    text TEXT NOT NULL,
+    like_count INT DEFAULT 0,
+    deleted BOOLEAN DEFAULT false,
+    created_at BIGINT NOT NULL
+  )`);
+  await pool.query(`CREATE INDEX IF NOT EXISTS idx_comments_post ON comments (post_id, created_at)`);
+  await pool.query(`CREATE TABLE IF NOT EXISTS comment_likes (
+    comment_id TEXT NOT NULL REFERENCES comments(id) ON DELETE CASCADE,
+    username TEXT NOT NULL REFERENCES accounts(username),
+    PRIMARY KEY (comment_id, username)
+  )`);
+
+  // Quote of the day
+  await pool.query(`CREATE TABLE IF NOT EXISTS daily_quotes (
+    id TEXT PRIMARY KEY,
+    text TEXT NOT NULL,
+    author TEXT DEFAULT '',
+    added_by TEXT NOT NULL,
+    created_at BIGINT NOT NULL
+  )`);
+
   console.log('[JorgeGram DB] All tables ready');
 }
 

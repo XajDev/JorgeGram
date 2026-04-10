@@ -73,6 +73,30 @@ body.xp-silver .R{border-color:#b0b0b0;background:#e8e8e8}body.xp-silver .post{b
 /* Olive */
 body.xp-olive .nv{background:#dde0c8;border-color:#a0a890}body.xp-olive .nv a{color:#4a5a2a;border-color:#dde0c8}body.xp-olive .nv b{color:#4a5a2a}
 body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{border-color:#a0a890;background:#e8e8d8}body.xp-olive .T{background:#5a6a3a}body.xp-olive .B{border-color:#a0a890;background:#dde0c8}body.xp-olive .I{border-color:#a0a890}body.xp-olive .mp{background:#e8e8d8}
+/* Silver new elements */
+body.xp-silver .toast{background:#e8e8e8;border-color:#b0b0b0}
+body.xp-silver .confirm-box .mp{background:#e8e8e8}body.xp-silver .mo-win .mp{background:#e8e8e8}
+body.xp-silver .quote-box{border-color:#b0b0b0;background:#f4f4f4}
+body.xp-silver .notif-item{border-color:#b0b0b0}body.xp-silver .notif-item:hover{background:#d8d8d8}body.xp-silver .notif-item.unread{background:#f4f4e8}
+body.xp-silver .user-row{border-color:#b0b0b0}body.xp-silver .badge-tag{background:#e8e8e8;border-color:#aaa}
+body.xp-silver .post-actions{border-color:#b0b0b0}body.xp-silver .post-actions span:hover{border-color:#999;background:#d8d8d8}
+body.xp-silver .tab{border-color:#b0b0b0;background:#d8d8d8}body.xp-silver .tab.on{background:#e8e8e8;border-bottom-color:#e8e8e8}
+body.xp-silver .hashtag{color:#4a6a7a}
+/* Olive new elements */
+body.xp-olive .toast{background:#e8e8d8;border-color:#a0a890}
+body.xp-olive .confirm-box .mp{background:#e8e8d8}body.xp-olive .mo-win .mp{background:#e8e8d8}
+body.xp-olive .quote-box{border-color:#a0a890;background:#f4f4e8}
+body.xp-olive .notif-item{border-color:#a0a890}body.xp-olive .notif-item:hover{background:#ccd0b8}body.xp-olive .notif-item.unread{background:#f0f0d8}
+body.xp-olive .user-row{border-color:#a0a890}body.xp-olive .badge-tag{background:#e8e8d8;border-color:#999}
+body.xp-olive .post-actions{border-color:#a0a890}body.xp-olive .post-actions span:hover{border-color:#8a9a6a;background:#ccd0b8}
+body.xp-olive .tab{border-color:#a0a890;background:#ccd0b8}body.xp-olive .tab.on{background:#e8e8d8;border-bottom-color:#e8e8d8}
+body.xp-olive .hashtag{color:#4a5a2a}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#ece9d8;border:2px outset #d4d0c8;padding:6px 16px;font-size:11px;z-index:400;animation:toastin .3s ease}
+.toast-ok{border-left:4px solid #090}
+.toast-err{border-left:4px solid #c00}
+@keyframes toastin{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+body.dark .toast{background:#2a2a3e;border-color:#444;color:#c0c0c0}
 </style>
 </head>
 <body class="xp-blue">
@@ -87,7 +111,9 @@ body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{bor
     <b id="nav-dn"></b>
     <input type="button" class="B Bs" value="Notifs" onclick="swTab('notifs',this)"><span id="notif-badge-nav"></span>
     <input type="button" class="B Bs" value="Bookmarks" onclick="swTab('bookmarks',this)">
+    <input type="button" class="B Bs" value="Account" onclick="location.href='https://jorgepompacarrera.net/account'">
     <input type="button" class="B Bs" value="Settings" onclick="showSettings()">
+    <input type="button" class="B Bs" id="admin-btn" value="Admin" onclick="openAdmin()" style="display:none">
     <input type="button" class="B Bs" value="Logout" onclick="doLogout()">
   </span>
 </div>
@@ -97,6 +123,8 @@ body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{bor
     <span class="tab" onclick="swTab('foryou',this)">For You</span>
     <span class="tab" onclick="swTab('explore',this)">Explore</span>
     <span class="tab" onclick="swTab('trending',this)">Trending</span>
+    <span class="tab" onclick="swTab('trendingusers',this)">Hot Users</span>
+    <span class="tab" onclick="swTab('lists',this)">Lists</span>
     <span class="tab" onclick="swTab('search',this)">Search</span>
     <span class="tab" onclick="swTab('myprofile',this)">Profile</span>
   </div>
@@ -111,6 +139,8 @@ body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{bor
         <input type="file" id="compose-img" accept="image/*" style="font-size:10px;margin-top:4px">
         <input type="button" class="B Bs" value="GIF" onclick="openGifPicker()" style="margin-top:4px">
         <input type="button" class="B Bs" value="Save Draft" onclick="saveDraft()" style="margin-top:4px">
+        <input type="button" class="B Bs" value="Schedule" onclick="showSchedulePost()" style="margin-top:4px">
+        <input type="button" class="B Bs" value="Templates" onclick="showTemplates()" style="margin-top:4px">
         <input type="button" class="B" value="Post" onclick="submitPost()" style="float:right;margin-top:4px">
       </div>
       <div id="gif-preview" style="display:none;margin-top:4px"><img id="gif-preview-img" style="max-height:100px;border:1px solid #d4d0c8"> <span style="color:#c00;cursor:pointer" onclick="clearGif()">[x]</span></div>
@@ -158,11 +188,12 @@ body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{bor
         <span onclick="showFollowing()"><b id="pv-following">0</b>Following</span>
         <span><b id="pv-streak">0</b>&#x1f525; Streak</span>
       </div>
-      <div style="margin-top:6px" id="pv-actions">
+      <div style="margin-top:6" id="pv-actions">
         <input type="button" class="B" id="pv-follow-btn" value="Follow" onclick="toggleFollow()">
         <input type="button" class="B Bs" id="pv-block-btn" value="Block" onclick="toggleBlock()">
         <input type="button" class="B Bs" id="pv-mute-btn" value="Mute" onclick="toggleMute()">
       </div>
+      <div id="pv-pinned" style="margin-top:6px"></div>
       <div style="margin-top:6px">
         <span class="tab on" id="ptab-posts" onclick="profTab('posts',this)">Posts</span>
         <span class="tab" id="ptab-media" onclick="profTab('media',this)">Media</span>
@@ -177,6 +208,11 @@ body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{bor
   <div id="notifs-view" style="display:none"><div class="R"><div class="T">Notifications <input type="button" class="B Bs" value="Mark All Read" onclick="markRead()" style="float:right"></div><div id="notif-list" class="mp" style="max-height:500px;overflow-y:auto"></div></div></div>
   <!-- User list modal inline -->
   <div id="user-list-view" style="display:none"><div class="R"><div class="T" id="ul-title">Users</div><div id="ul-list" class="mp" style="max-height:400px;overflow-y:auto"></div></div></div>
+  <!-- Quote of the Day -->
+  <div id="qotd" style="display:none;margin:6px 0" class="R">
+    <div class="T">&#128172; Quote of the Day</div>
+    <div id="qotd-content" class="mp" style="padding:8px;font-style:italic"></div>
+  </div>
   <!-- Post of the Day -->
   <div id="potd" style="display:none;margin:6px 0" class="R">
     <div class="T">&#11088; Post of the Day</div>
@@ -219,14 +255,109 @@ body.xp-olive .R{border-color:#a0a890;background:#e8e8d8}body.xp-olive .post{bor
     <input type="button" class="B" value="Yes" id="cfm-yes"> <input type="button" class="B" value="No" onclick="closeConfirm()">
   </div>
 </div>
+<!-- Templates -->
+<div class="mo-win R" id="mo-templates" style="width:340px;margin-left:-170px;margin-top:-160px">
+  <div class="T">Post Templates</div>
+  <div class="mp" style="padding:16px">
+    <div id="tmpl-list" style="max-height:200px;overflow-y:auto;margin-bottom:8px"></div>
+    <hr style="border:1px groove #d4d0c8;margin:8px 0">
+    <b>Save New Template:</b><br>
+    <input class="I" id="tmpl-name" placeholder="Template name" maxlength="30" style="width:100%;margin:4px 0">
+    <textarea class="I" id="tmpl-text" rows="2" maxlength="280" placeholder="Template text" style="width:100%"></textarea>
+    <input type="button" class="B Bs" value="Save" onclick="saveTemplate()" style="margin-top:4px">
+    <div id="tmpl-e" style="font-size:10px;min-height:14px"></div>
+    <div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div>
+  </div>
+</div>
+<!-- Lists -->
+<div class="mo-win R" id="mo-lists" style="width:360px;margin-left:-180px;margin-top:-160px">
+  <div class="T">My Lists</div>
+  <div class="mp" style="padding:16px">
+    <div id="lists-list" style="max-height:200px;overflow-y:auto;margin-bottom:8px"></div>
+    <hr style="border:1px groove #d4d0c8;margin:8px 0">
+    <b>Create List:</b><br>
+    <input class="I" id="list-name" placeholder="List name" maxlength="50" style="width:100%;margin:4px 0">
+    <input class="I" id="list-desc" placeholder="Description (optional)" maxlength="200" style="width:100%;margin:4px 0">
+    <input type="checkbox" id="list-priv"> <label for="list-priv">Private</label>
+    <input type="button" class="B Bs" value="Create" onclick="createList()" style="margin-left:8px">
+    <div id="list-e" style="font-size:10px;min-height:14px"></div>
+    <div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div>
+  </div>
+</div>
+<!-- List View -->
+<div class="mo-win R" id="mo-listview" style="width:360px;margin-left:-180px;margin-top:-160px">
+  <div class="T" id="lv-title">List</div>
+  <div class="mp" style="padding:16px">
+    <div id="lv-members" style="max-height:150px;overflow-y:auto;margin-bottom:8px"></div>
+    <b>Add User:</b><br>
+    <input class="I" id="lv-add" placeholder="username" maxlength="24" style="width:120px"> <input type="button" class="B Bs" value="Add" onclick="listAddUser()">
+    <div id="lv-e" style="font-size:10px;min-height:14px"></div>
+    <input type="button" class="B" value="View Timeline" onclick="viewListTimeline()" style="margin-top:8px">
+    <div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div>
+  </div>
+</div>
+<!-- Quote Admin (inside admin panel) -->
+<!-- Schedule Post -->
+<div class="mo-win R" id="mo-schedpost" style="width:340px;margin-left:-170px;margin-top:-140px">
+  <div class="T">Schedule Post</div>
+  <div class="mp" style="padding:16px">
+    <textarea class="I" id="sp-text" rows="3" maxlength="280" placeholder="What's happening?"></textarea><br>
+    <b>Send at:</b><br><input class="I" id="sp-time" type="datetime-local" style="width:200px"><br><br>
+    <div id="sp-e" style="font-size:10px;min-height:14px"></div>
+    <div align="right"><input type="button" class="B" value="Schedule" onclick="doSchedulePost()"> <input type="button" class="B" value="Cancel" onclick="closeModal()"></div>
+    <hr style="border:1px groove #d4d0c8;margin:8px 0">
+    <b>Pending:</b><div id="sp-list" style="max-height:100px;overflow-y:auto;margin-top:4px"></div>
+  </div>
+</div>
+<!-- Post Analytics -->
+<div class="mo-win R" id="mo-analytics" style="width:300px;margin-left:-150px">
+  <div class="T">Post Analytics</div>
+  <div class="mp" id="analytics-body" style="padding:16px"></div>
+  <div class="mp" style="padding:4px 8px"><div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div></div>
+</div>
+<!-- Admin Panel -->
+<div class="mo-win R" id="mo-admin" style="width:440px;margin-left:-220px;margin-top:-200px">
+  <div class="T">Admin Panel</div>
+  <div class="mp" style="padding:16px;max-height:500px;overflow-y:auto">
+    <div id="admin-stats" style="font-weight:bold;margin-bottom:8px"></div>
+    <hr>
+    <b>Delete Post by ID:</b><br>
+    <input class="I" id="adm-pid" placeholder="Post ID" style="width:200px"> <input type="button" class="B Bs" value="Delete" onclick="admDelPost()">
+    <div class="msg" id="adm-pid-msg"></div>
+    <hr>
+    <b>Set Badge:</b><br>
+    <input class="I" id="adm-bu" placeholder="username" style="width:100px"> <input class="I" id="adm-bb" placeholder="badge text" style="width:80px">
+    <input type="button" class="B Bs" value="Add" onclick="admBadge('add')"> <input type="button" class="B Bs" value="Remove" onclick="admBadge('remove')">
+    <div class="msg" id="adm-be"></div>
+    <hr>
+    <b>Delete User:</b><br>
+    <input class="I" id="adm-du" placeholder="username" style="width:150px"> <input type="button" class="B Bs" value="Delete User" onclick="admDelUser()">
+    <div class="msg" id="adm-du-msg"></div>
+    <hr>
+    <b>Reports:</b> <input type="button" class="B Bs" value="Load" onclick="loadReports()">
+    <div id="adm-reports" style="max-height:150px;overflow-y:auto;margin-top:4px"></div>
+    <hr>
+    <b>Add Quote of the Day:</b><br>
+    <input class="I" id="adm-qt" placeholder="Quote text" style="width:100%;margin:2px 0">
+    <input class="I" id="adm-qa" placeholder="Author (optional)" style="width:100%;margin:2px 0">
+    <input type="button" class="B Bs" value="Add Quote" onclick="addQuote()">
+    <div id="adm-qe" style="font-size:10px;min-height:14px"></div>
+    <hr>
+    <b>All Users:</b>
+    <div id="adm-users" style="max-height:200px;overflow-y:auto;margin-top:4px"></div>
+    <br><div align="right"><input type="button" class="B" value="Close" onclick="closeModal()"></div>
+  </div>
+</div>
 <!-- Lightbox -->
 <div class="lb-bg" id="lb" onclick="this.style.display='none'"><img id="lb-img" src=""></div>
 
 <script>
-var myU='',myDN='',myCol='',myTk='',myTheme='xp-blue',curTab='explore',replyTo=null,quoteOf=null,viewingUser='',oldestTs=null,selectedGif=null;
+var myU='',myDN='',myCol='',myTk='',myTheme='xp-blue',myAdmin=false,curTab='explore',replyTo=null,quoteOf=null,viewingUser='',oldestTs=null,selectedGif=null;
 function $(id){return document.getElementById(id)}
 function api(u,b,c){fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json()}).then(c).catch(function(){c({error:'err'})})}
 function apiGet(u,c){fetch(u).then(function(r){return r.json()}).then(c).catch(function(){c({error:'err'})})}
+
+function toast(msg,type){var d=document.createElement('div');d.className='toast'+(type==='ok'?' toast-ok':type==='err'?' toast-err':'');d.innerHTML=msg;document.body.appendChild(d);setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},3000)}
 function esc(t){if(!t)return'';var d=document.createElement('div');d.appendChild(document.createTextNode(t));return d.innerHTML}
 function timeAgo(ts){var d=Date.now()-parseInt(ts);if(d<60000)return'now';if(d<3600000)return Math.floor(d/60000)+'m';if(d<86400000)return Math.floor(d/3600000)+'h';return Math.floor(d/86400000)+'d'}
 function fullDate(ts){return new Date(parseInt(ts)).toLocaleString()}
@@ -242,23 +373,23 @@ function applyTheme(){var t=$('s-theme').value;document.body.className=t;myTheme
 function showSettings(){$('s-theme').value=myTheme;$('mo-bg').style.display='block';$('mo-set').style.display='block'}
 
 // Auth
-window.onload=function(){var p=window.location.pathname;var tk=localStorage.getItem('jg_token');if(tk){api('/api/auth',{token:tk},function(d){if(!d.error){myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;loggedIn();handleRoute(p)}else{localStorage.removeItem('jg_token');handleRoute(p)}})}else{$('main-tabs').style.display='';handleRoute(p)}}
+window.onload=function(){var p=window.location.pathname;var tk=localStorage.getItem('jg_token');if(tk){api('/api/auth',{token:tk},function(d){if(!d.error){myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;myAdmin=d.isAdmin;loggedIn();handleRoute(p)}else{localStorage.removeItem('jg_token');handleRoute(p)}})}else{$('main-tabs').style.display='';handleRoute(p)}}
 function handleRoute(p){if(p.startsWith('/post/')){var id=p.split('/post/')[1];if(id)viewThread(id)}else if(p.startsWith('/user/')){var un=p.split('/user/')[1];if(un)viewUser(un)}else if(!myTk){swTab('explore')}}
 function showAuth(mode){$('mo-bg').style.display='block';$('mo-auth').style.display='block';if(mode==='re'){$('auth-li').style.display='none';$('auth-re').style.display='';$('auth-title').innerHTML='Register';$('auth-switch').innerHTML='Have account? Sign in'}else{$('auth-li').style.display='';$('auth-re').style.display='none';$('auth-title').innerHTML='Sign In';$('auth-switch').innerHTML='Need account? Register'}}
 function toggleAuthMode(){if($('auth-li').style.display==='none')showAuth('li');else showAuth('re')}
-function closeModal(){$('mo-bg').style.display='none';$('mo-auth').style.display='none';$('mo-set').style.display='none';$('mo-likes').style.display='none'}
+function closeModal(){$('mo-bg').style.display='none';$('mo-auth').style.display='none';$('mo-set').style.display='none';$('mo-likes').style.display='none';$('mo-admin').style.display='none';$('mo-schedpost').style.display='none';$('mo-analytics').style.display='none';$('mo-templates').style.display='none';$('mo-lists').style.display='none';$('mo-listview').style.display='none'}
 function doLogin(){var u=$('li-u').value,p=$('li-p').value;if(!u||!p){$('li-e').innerHTML='Fill both';return}api('/api/login',{username:u,password:p},function(d){if(d.error)$('li-e').innerHTML=esc(d.error);else{myU=d.username;myDN=d.displayName;myCol=d.color;myTk=d.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
 function doRegister(){var u=$('re-u').value,d=$('re-d').value,p=$('re-p').value;if(!u||!d||!p){$('re-e').innerHTML='Fill all';return}api('/api/register',{username:u,displayName:d,password:p},function(r){if(r.error)$('re-e').innerHTML=esc(r.error);else{myU=r.username;myDN=r.displayName;myCol=r.color;myTk=r.token;localStorage.setItem('jg_token',myTk);closeModal();loggedIn()}})}
 $('li-u').onkeydown=$('li-p').onkeydown=function(e){if(e.keyCode===13)doLogin()};
 $('re-u').onkeydown=$('re-d').onkeydown=$('re-p').onkeydown=function(e){if(e.keyCode===13)doRegister()};
 function doLogout(){localStorage.removeItem('jg_token');location.reload()}
-function loggedIn(){$('nav-auth').style.display='none';$('nav-user').style.display='';$('nav-dn').innerHTML=esc(myDN);$('main-tabs').style.display='';$('compose-box').style.display='';swTab('timeline');pollNotifs()}
+function loggedIn(){$('nav-auth').style.display='none';$('nav-user').style.display='';$('nav-dn').innerHTML=esc(myDN);$('main-tabs').style.display='';$('compose-box').style.display='';if(myAdmin)$('admin-btn').style.display='';swTab('timeline');pollNotifs()}
 
 // Notification polling
 function pollNotifs(){if(!myTk)return;api('/api/notification-count',{token:myTk},function(d){if(d.count>0)$('notif-badge-nav').innerHTML='<span class="notif-badge">'+d.count+'</span>';else $('notif-badge-nav').innerHTML=''});setTimeout(pollNotifs,15000)}
 
 // Tabs
-function swTab(tab,el){curTab=tab;$('feed').innerHTML='';oldestTs=null;$('potd').style.display='none';$('search-bar').style.display=tab==='search'?'':'none';$('profile-view').style.display=(tab==='myprofile'||tab==='userprofile')?'':'none';$('notifs-view').style.display=tab==='notifs'?'':'none';$('user-list-view').style.display='none';$('trending-tags').style.display=(tab==='trending'||tab==='explore')?'':'none';$('compose-box').style.display=(myTk&&tab!=='search'&&tab!=='notifs'&&tab!=='bookmarks')?'':'none';$('load-more').style.display='none';if(el){var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';el.className='tab on'}if(tab==='timeline'){loadTimeline();loadPOTD()}else if(tab==='foryou')loadForYou();else if(tab==='explore'){loadExplore();loadTrendingTags()}else if(tab==='trending'){loadTrending();loadTrendingTags()}else if(tab==='myprofile'){viewingUser=myU;loadProfile(myU);loadSuggested()}else if(tab==='notifs')loadNotifs();else if(tab==='bookmarks')loadBookmarks();else if(tab==='drafts')loadDrafts();else if(tab==='userprofile')loadProfile(viewingUser)}
+function swTab(tab,el){curTab=tab;$('feed').innerHTML='';oldestTs=null;$('potd').style.display='none';$('search-bar').style.display=tab==='search'?'':'none';$('profile-view').style.display=(tab==='myprofile'||tab==='userprofile')?'':'none';$('notifs-view').style.display=tab==='notifs'?'':'none';$('user-list-view').style.display='none';$('trending-tags').style.display=(tab==='trending'||tab==='explore')?'':'none';$('compose-box').style.display=(myTk&&tab!=='search'&&tab!=='notifs'&&tab!=='bookmarks')?'':'none';$('load-more').style.display='none';if(el){var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';el.className='tab on'}if(tab==='timeline'){loadTimeline();loadPOTD();loadQOTD()}else if(tab==='foryou')loadForYou();else if(tab==='explore'){loadExplore();loadTrendingTags()}else if(tab==='trending'){loadTrending();loadTrendingTags()}else if(tab==='trendingusers')loadTrendingUsers();else if(tab==='lists'){showListsManager()}else if(tab==='myprofile'){viewingUser=myU;loadProfile(myU);loadSuggested()}else if(tab==='notifs')loadNotifs();else if(tab==='bookmarks')loadBookmarks();else if(tab==='drafts')loadDrafts();else if(tab==='userprofile')loadProfile(viewingUser)}
 
 function loadTimeline(){api('/api/timeline',{token:myTk,before:oldestTs||Date.now()+1},function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
 function loadExplore(){api('/api/explore',{token:myTk,before:oldestTs||Date.now()+1},function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
@@ -269,7 +400,7 @@ function loadTrendingTags(){apiGet('/api/trending-tags',function(d){if(!d.tags||
 function searchTag(tag){$('search-q').value='#'+tag;swTab('search');doSearch()}
 
 // Profile
-function loadProfile(un){viewingUser=un;$('profile-view').style.display='';apiGet('/api/profile/'+un+'?viewer='+myU,function(d){if(d.error)return;$('pv-dn').innerHTML=esc(d.displayName);$('pv-dn').style.color=d.color;$('pv-un').innerHTML='@'+esc(d.username);$('pv-bio').innerHTML=esc(d.bio||'');$('pv-banner').style.backgroundColor=d.bannerColor||'#0a246a';if(d.pfp){$('pv-pfp').src=d.pfp;$('pv-pfp').style.display=''}else $('pv-pfp').style.display='none';var badges='';if(d.badges)for(var i=0;i<d.badges.length;i++)badges+='<span class="badge-tag">'+esc(d.badges[i])+'</span>';$('pv-badges').innerHTML=badges;$('pv-posts').innerHTML=d.postCount;$('pv-followers').innerHTML=d.followerCount;$('pv-following').innerHTML=d.followingCount;if(un===myU){$('pv-follow-btn').style.display='none';$('pv-block-btn').style.display='none';$('pv-mute-btn').style.display='none'}else{$('pv-follow-btn').style.display='';$('pv-follow-btn').value=d.isFollowing?'Unfollow':'Follow';$('pv-block-btn').style.display='';$('pv-mute-btn').style.display='';loadBlockMuteStatus(un)}});$('feed').innerHTML='';oldestTs=null;profTabMode='posts';loadUserPosts();loadStreak(un)}
+function loadProfile(un){viewingUser=un;$('profile-view').style.display='';apiGet('/api/profile/'+un+'?viewer='+myU,function(d){if(d.error)return;$('pv-dn').innerHTML=esc(d.displayName);$('pv-dn').style.color=d.color;$('pv-un').innerHTML='@'+esc(d.username);$('pv-bio').innerHTML=esc(d.bio||'');$('pv-banner').style.backgroundColor=d.bannerColor||'#0a246a';if(d.pfp){$('pv-pfp').src=d.pfp;$('pv-pfp').style.display=''}else $('pv-pfp').style.display='none';var badges='';if(d.badges)for(var i=0;i<d.badges.length;i++)badges+='<span class="badge-tag">'+esc(d.badges[i])+'</span>';$('pv-badges').innerHTML=badges;$('pv-posts').innerHTML=d.postCount;$('pv-followers').innerHTML=d.followerCount;$('pv-following').innerHTML=d.followingCount;if(un===myU){$('pv-follow-btn').style.display='none';$('pv-block-btn').style.display='none';$('pv-mute-btn').style.display='none'}else{$('pv-follow-btn').style.display='';$('pv-follow-btn').value=d.isFollowing?'Unfollow':'Follow';$('pv-block-btn').style.display='';$('pv-mute-btn').style.display='';loadBlockMuteStatus(un)}});$('feed').innerHTML='';oldestTs=null;profTabMode='posts';loadUserPosts();loadStreak(un);loadPinnedPost(un)}
 function loadUserPosts(){apiGet('/api/user/'+viewingUser+'/posts?viewer='+myU+'&before='+(oldestTs||Date.now()+1),function(d){if(d.posts){renderPosts(d.posts);$('load-more').style.display=d.posts.length>=30?'':'none'}})}
 function toggleFollow(){api('/api/follow',{token:myTk,username:viewingUser},function(d){if(!d.error){$('pv-follow-btn').value=d.following?'Unfollow':'Follow';loadProfile(viewingUser)}})}
 function showFollowers(){$('user-list-view').style.display='';$('ul-title').innerHTML='Followers';apiGet('/api/user/'+viewingUser+'/followers',function(d){renderUserList(d.users||[])})}
@@ -306,9 +437,13 @@ function renderPost(p){
   html+='<span onclick="viewThread(\''+p.id+'\')">View</span>';
   html+='<span onclick="showLikes(\''+p.id+'\')">'+p.like_count+' likes</span>';
   html+='<span onclick="copyLink(\''+p.id+'\')" title="Copy link">Link</span>';
+  html+='<span onclick="getEmbed(\''+p.id+'\')" title="Embed code">Embed</span>';
   html+='<span style="color:gray;border:none;cursor:default">&#128065; '+p.view_count+'</span>';
   if(p.username===myU)html+='<span onclick="editPost(\''+p.id+'\',\''+esc(p.text).replace(/'/g,'\\&#39;')+'\')">Edit</span>';
   if(p.username===myU)html+='<span onclick="deletePost(\''+p.id+'\')">Del</span>';
+  if(p.username===myU)html+='<span onclick="pinPost(\''+p.id+'\')">'+(p.pinned?'Unpin':'Pin')+'</span>';
+  if(p.username===myU)html+='<span onclick="showAnalytics(\''+p.id+'\')">Stats</span>';
+  if(myTk&&p.username!==myU)html+='<span onclick="reportPost(\''+p.id+'\')" style="color:gray">Report</span>';
   if(p.edited)html+='<span style="color:gray;border:none;cursor:pointer;font-style:italic" onclick="showEdits(\''+p.id+'\')">(edited)</span>';
   html+='</div>';
   div.innerHTML=html;$('feed').appendChild(div)}
@@ -321,7 +456,7 @@ function doBookmark(id){api('/api/bookmark',{token:myTk,postId:id},function(d){i
 function deletePost(id){showConfirm('Delete this post?',function(){api('/api/delete-post',{token:myTk,postId:id},function(d){if(!d.error)refreshFeed()})})}
 function showLikes(id){$('mo-bg').style.display='block';$('mo-likes').style.display='block';apiGet('/api/post/'+id+'/likes',function(d){renderLikesList(d.users||[])})}
 function renderLikesList(users){var el=$('likes-list');el.innerHTML='';if(!users.length){el.innerHTML='<div style="padding:8px;color:gray">No likes yet</div>';return}for(var i=0;i<users.length;i++){var u=users[i];var div=document.createElement('div');div.className='user-row';var pfp=u.pfp?'<img src="'+u.pfp+'">':'';div.innerHTML=pfp+'<span style="color:'+(u.color||'#000')+';font-weight:bold;cursor:pointer" onclick="closeModal();viewUser(\''+u.username+'\')">'+esc(u.display_name)+'</span> <span style="color:gray">@'+esc(u.username)+'</span>';el.appendChild(div)}}
-function copyLink(id){var url='https://jorgepompacarrera.info/post/'+id;if(navigator.clipboard)navigator.clipboard.writeText(url);else{var t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)}alert('Link copied!')}
+function copyLink(id){var url='https://jorgepompacarrera.info/post/'+id;if(navigator.share){navigator.share({title:'JorgeGram Post',url:url}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast('Link copied!','ok')}).catch(function(){toast('Failed to copy','err')})}else{var t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);toast('Link copied!','ok')}}
 function refreshFeed(){$('feed').innerHTML='';oldestTs=null;if(curTab==='timeline')loadTimeline();else if(curTab==='explore')loadExplore();else if(curTab==='trending')loadTrending();else if(curTab==='foryou')loadForYou();else if(curTab==='bookmarks')loadBookmarks();else if(curTab==='myprofile'||curTab==='userprofile')loadUserPosts();else if(curTab==='thread')viewThread(curThreadId)}
 var curThreadId='';
 
@@ -334,12 +469,12 @@ function cancelQuote(){quoteOf=null;$('compose-quote').style.display='none'}
 function submitPost(){var text=$('compose-text').value.trim();var imgFile=$('compose-img').files[0];
   // Check if poll form is open
   if($('poll-form').style.display!=='none'){submitPoll();return}
-  if(!text&&!imgFile&&!selectedGif){alert('Write something');return}
-  if(quoteOf){api('/api/quote',{token:myTk,text:text,postId:quoteOf},function(d){if(d.error)alert(d.error);else{$('compose-text').value='';cancelQuote();updateCC();refreshFeed()}});return}
-  if(imgFile){var fd=new FormData();fd.append('image',imgFile);fd.append('token',myTk);fetch('/api/upload-image',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(d){if(d.url)createPost(text,d.url,null);else alert(d.error||'Upload failed')})}
+  if(!text&&!imgFile&&!selectedGif){toast('Write something','err');return}
+  if(quoteOf){api('/api/quote',{token:myTk,text:text,postId:quoteOf},function(d){if(d.error)toast(d.error,'err');else{$('compose-text').value='';cancelQuote();updateCC();refreshFeed()}});return}
+  if(imgFile){var fd=new FormData();fd.append('image',imgFile);fd.append('token',myTk);fetch('/api/upload-image',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(d){if(d.url)createPost(text,d.url,null);else toast(d.error||'Upload failed','err')})}
   else if(selectedGif){createPost(text,null,selectedGif)}
   else createPost(text,null,null)}
-function createPost(text,imageUrl,gifUrl){api('/api/post',{token:myTk,text:text,imageUrl:imageUrl,gifUrl:gifUrl,replyTo:replyTo},function(d){if(d.error)alert(d.error);else{$('compose-text').value='';$('compose-img').value='';cancelReply();clearGif();updateCC();refreshFeed()}})}
+function createPost(text,imageUrl,gifUrl){api('/api/post',{token:myTk,text:text,imageUrl:imageUrl,gifUrl:gifUrl,replyTo:replyTo},function(d){if(d.error)toast(d.error,'err');else{$('compose-text').value='';$('compose-img').value='';cancelReply();clearGif();updateCC();refreshFeed()}})}
 
 // GIF Picker — SDK powered (@giphy/js-components)
 var gifPickerReady=false,gifMode='trending',gifSDKTO=null;
@@ -354,7 +489,10 @@ function clearGif(){selectedGif=null;$('gif-preview').style.display='none'}
 function viewUser(un){viewingUser=un;curTab='userprofile';$('profile-view').style.display='';$('search-bar').style.display='none';$('notifs-view').style.display='none';$('user-list-view').style.display='none';$('feed').innerHTML='';oldestTs=null;loadProfile(un);var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';history.pushState(null,'','/')}
 
 // Thread
-function viewThread(id){curThreadId=id;$('feed').innerHTML='';$('profile-view').style.display='none';$('search-bar').style.display='none';$('notifs-view').style.display='none';$('user-list-view').style.display='none';$('trending-tags').style.display='none';oldestTs=null;curTab='thread';var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';apiGet('/api/post/'+id+'?viewer='+myU,function(d){if(d.error){$('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">Post not found</div>';return}renderPost(d.post);if(d.replies)for(var i=0;i<d.replies.length;i++)renderPost(d.replies[i]);$('load-more').style.display='none';if(myTk)api('/api/view',{token:myTk,postId:id},function(){})})}
+function viewThread(id){curThreadId=id;$('feed').innerHTML='';$('profile-view').style.display='none';$('search-bar').style.display='none';$('notifs-view').style.display='none';$('user-list-view').style.display='none';$('trending-tags').style.display='none';oldestTs=null;curTab='thread';var tabs=$('main-tabs').getElementsByClassName('tab');for(var i=0;i<tabs.length;i++)tabs[i].className='tab';apiGet('/api/post/'+id+'?viewer='+myU,function(d){if(d.error){$('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">Post not found</div>';return}renderPost(d.post);if(d.replies)for(var i=0;i<d.replies.length;i++)renderPost(d.replies[i]);
+  // Comments section
+  var cDiv=document.createElement('div');cDiv.className='R';cDiv.style.margin='6px 0';cDiv.innerHTML='<div class="T">Comments</div><div class="mp" style="padding:8px"><div id="comment-list"></div><div style="margin-top:8px"><textarea class="I" id="comment-text" rows="2" maxlength="500" placeholder="Write a comment..." style="width:100%"></textarea><input type="button" class="B Bs" value="Comment" onclick="postComment(\''+id+'\')" style="margin-top:4px"></div></div>';$('feed').appendChild(cDiv);loadComments(id);
+  $('load-more').style.display='none';if(myTk)api('/api/view',{token:myTk,postId:id},function(){})})}
 
 // Search
 function doSearch(){var q=$('search-q').value.trim();if(!q)return;$('feed').innerHTML='';apiGet('/api/search?q='+encodeURIComponent(q)+'&viewer='+myU,function(d){if(d.posts&&d.posts.length)for(var i=0;i<d.posts.length;i++)renderPost(d.posts[i]);else $('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No results</div>'})}
@@ -362,8 +500,8 @@ $('search-q').onkeydown=function(e){if(e.keyCode===13)doSearch()};
 
 // Poll
 function togglePollForm(){var f=$('poll-form');if(f.style.display==='none'){f.style.display='';$('poll-toggle').style.display='none'}else{f.style.display='none';$('poll-toggle').style.display=''}}
-function submitPoll(){var text=$('compose-text').value.trim();var opts=[$('poll-o1').value.trim(),$('poll-o2').value.trim(),$('poll-o3').value.trim(),$('poll-o4').value.trim()].filter(function(o){return o});if(opts.length<2){alert('Need at least 2 options');return}api('/api/post-poll',{token:myTk,text:text,options:opts,duration:parseInt($('poll-dur').value)},function(d){if(d.error)alert(d.error);else{$('compose-text').value='';$('poll-o1').value='';$('poll-o2').value='';$('poll-o3').value='';$('poll-o4').value='';togglePollForm();updateCC();refreshFeed()}})}
-function votePoll(postId,idx){api('/api/poll-vote',{token:myTk,postId:postId,optionIdx:idx},function(d){if(d.error)alert(d.error);else refreshFeed()})}
+function submitPoll(){var text=$('compose-text').value.trim();var opts=[$('poll-o1').value.trim(),$('poll-o2').value.trim(),$('poll-o3').value.trim(),$('poll-o4').value.trim()].filter(function(o){return o});if(opts.length<2){toast('Need at least 2 options','err');return}api('/api/post-poll',{token:myTk,text:text,options:opts,duration:parseInt($('poll-dur').value)},function(d){if(d.error)toast(d.error,'err');else{$('compose-text').value='';$('poll-o1').value='';$('poll-o2').value='';$('poll-o3').value='';$('poll-o4').value='';togglePollForm();updateCC();refreshFeed()}})}
+function votePoll(postId,idx){api('/api/poll-vote',{token:myTk,postId:postId,optionIdx:idx},function(d){if(d.error)toast(d.error,'err');else refreshFeed()})}
 function loadPollUI(postId,container){apiGet('/api/poll/'+postId+'?viewer='+myU,function(d){if(d.error)return;var h='';var total=d.totalVotes||0;for(var i=0;i<d.options.length;i++){var count=d.votes[i]||0;var pct=total>0?Math.round(count/total*100):0;var voted=d.myVote===i;var canVote=d.myVote===null&&!d.ended;h+='<div style="margin:2px 0;padding:2px 4px;border:1px solid #d4d0c8;background:'+(voted?'#d0e0ff':'#fff')+';cursor:'+(canVote?'pointer':'default')+'" '+(canVote?'onclick="votePoll(\''+postId+'\','+i+')"':'')+'>'+esc(d.options[i])+' <b>'+pct+'%</b> ('+count+')</div>'}h+='<div style="font-size:9px;color:gray;margin-top:2px">'+total+' votes · '+(d.ended?'Ended':'Ends '+timeAgo(d.endsAt))+'</div>';container.innerHTML=h})}
 
 // Block/mute
@@ -379,20 +517,20 @@ function editPost(id,currentText){
   $('cfm-yes').onclick=function(){
     var newText=$('edit-textarea').value.trim();
     closeConfirm();$('cfm-yes').value='Yes';
-    if(newText&&newText!==currentText){api('/api/edit-post',{token:myTk,postId:id,text:newText},function(d){if(d.error)alert(d.error);else refreshFeed()})}
+    if(newText&&newText!==currentText){api('/api/edit-post',{token:myTk,postId:id,text:newText},function(d){if(d.error)toast(d.error,'err');else refreshFeed()})}
   };
   setTimeout(function(){var ta=$('edit-textarea');if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length)}},100);
 }
-function showEdits(id){apiGet('/api/post/'+id+'/edits',function(d){if(!d.edits||!d.edits.length){alert('No edit history');return}var msg='Edit history:<br>';for(var i=0;i<d.edits.length;i++){msg+='<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:10px"><b>'+fullDate(d.edits[i].edited_at)+'</b><br>'+esc(d.edits[i].old_text)+' → '+esc(d.edits[i].new_text)+'</div>'}$('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';$('cfm-yes').style.display='none';$('cfm-yes').onclick=null;setTimeout(function(){$('cfm-yes').style.display=''},0)})}
+function showEdits(id){apiGet('/api/post/'+id+'/edits',function(d){if(!d.edits||!d.edits.length){toast('No edit history','err');return}var msg='Edit history:<br>';for(var i=0;i<d.edits.length;i++){msg+='<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:10px"><b>'+fullDate(d.edits[i].edited_at)+'</b><br>'+esc(d.edits[i].old_text)+' → '+esc(d.edits[i].new_text)+'</div>'}$('cfm-msg').innerHTML=msg;$('cfm-bg').style.display='block';$('cfm-box').style.display='block';$('cfm-yes').style.display='none';$('cfm-yes').onclick=null;setTimeout(function(){$('cfm-yes').style.display=''},0)})}
 
 // Drafts
-function saveDraft(){var text=$('compose-text').value;if(!text.trim())return;api('/api/save-draft',{token:myTk,text:text,gifUrl:selectedGif},function(d){if(!d.error)alert('Draft saved!')})}
+function saveDraft(){var text=$('compose-text').value;if(!text.trim())return;api('/api/save-draft',{token:myTk,text:text,gifUrl:selectedGif},function(d){if(!d.error)toast('Draft saved!','ok')})}
 function loadDrafts(){api('/api/drafts',{token:myTk},function(d){var el=$('feed');el.innerHTML='';if(!d.drafts||!d.drafts.length){el.innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No drafts</div>';return}for(var i=0;i<d.drafts.length;i++){var dr=d.drafts[i];var div=document.createElement('div');div.className='post';div.innerHTML='<div class="post-body">'+esc(dr.text)+'</div><div class="post-actions"><span onclick="useDraft(\''+dr.id+'\',\''+esc(dr.text).replace(/'/g,'\\&#39;')+'\')">Use</span><span onclick="deleteDraft(\''+dr.id+'\')">Delete</span><span style="color:gray;border:none">'+timeAgo(dr.updated_at)+'</span></div>';el.appendChild(div)}})}
 function useDraft(id,text){$('compose-text').value=text;updateCC();api('/api/delete-draft',{token:myTk,id:id},function(){});swTab('timeline')}
 function deleteDraft(id){api('/api/delete-draft',{token:myTk,id:id},function(){loadDrafts()})}
 
 // Profile banner
-function saveBanner(){var c=$('s-banner').value;api('/api/update-banner',{token:myTk,color:c},function(d){if(d.error)alert(d.error);else alert('Banner updated!')})}
+function saveBanner(){var c=$('s-banner').value;api('/api/update-banner',{token:myTk,color:c},function(d){if(d.error)toast(d.error,'err');else toast('Banner updated!','ok')})}
 
 // Profile tabs (posts vs media)
 var profTabMode='posts';
@@ -425,6 +563,72 @@ document.addEventListener('keydown',function(e){
   if(e.key==='n'||e.key==='N'){e.preventDefault();$('compose-text').focus();window.scrollTo(0,0)}
   if(e.key==='/'||e.key==='s'){e.preventDefault();swTab('search');setTimeout(function(){$('search-q').focus()},100)}
 });
+
+// Admin Panel
+function openAdmin(){$('mo-bg').style.display='block';$('mo-admin').style.display='block';api('/api/admin/stats',{token:myTk},function(d){if(d.error)return;$('admin-stats').innerHTML='Users: '+d.users+' | Posts: '+d.posts+' | Follows: '+d.follows});api('/api/admin/users',{token:myTk},function(d){if(d.error)return;var el=$('adm-users');el.innerHTML='';for(var i=0;i<d.users.length;i++){var u=d.users[i];var div=document.createElement('div');div.style.cssText='padding:3px 0;border-bottom:1px groove #d4d0c8;font-size:11px';var badges='';if(u.badges)for(var j=0;j<u.badges.length;j++)badges+=' <span class="badge-tag">'+esc(u.badges[j])+'</span>';div.innerHTML='<span style="color:'+u.color+';font-weight:bold">'+esc(u.displayName)+'</span> ('+esc(u.username)+')'+badges+(u.isAdmin?' [ADMIN]':'');el.appendChild(div)}})}
+function admDelPost(){var id=$('adm-pid').value.trim();if(!id)return;api('/api/admin/delete-post',{token:myTk,postId:id},function(d){$('adm-pid-msg').innerHTML=d.error?'<span class="msg-err">'+esc(d.error)+'</span>':'<span class="msg-ok">Deleted</span>';if(!d.error)refreshFeed()})}
+function admBadge(action){var u=$('adm-bu').value.trim(),b=$('adm-bb').value.trim();if(!u||!b)return;api('/api/admin/set-badge',{token:myTk,username:u,badge:b,action:action},function(d){$('adm-be').innerHTML=d.error?'<span class="msg-err">'+esc(d.error)+'</span>':'<span class="msg-ok">Done! Badges: '+JSON.stringify(d.badges)+'</span>'})}
+function admDelUser(){var u=$('adm-du').value.trim();if(!u)return;showConfirm('Delete user '+esc(u)+'? Cannot be undone.',function(){api('/api/admin/delete-user',{token:myTk,username:u},function(d){$('adm-du-msg').innerHTML=d.error?'<span class="msg-err">'+esc(d.error)+'</span>':'<span class="msg-ok">User deleted</span>';if(!d.error)openAdmin()})})}
+
+// Pin post to profile
+function pinPost(id){api('/api/pin-post',{token:myTk,postId:id},function(d){if(d.error)toast(d.error,'err');else{toast(d.pinned?'Pinned!':'Unpinned','ok');refreshFeed()}})}
+
+// Report post
+function reportPost(id){showConfirm('Report this post?',function(){api('/api/report',{token:myTk,postId:id,reason:'Flagged by user'},function(d){if(d.error)toast(d.error,'err');else toast('Reported','ok')})})}
+
+// Post analytics
+function showAnalytics(id){$('mo-bg').style.display='block';$('mo-analytics').style.display='block';apiGet('/api/post/'+id+'/analytics?viewer='+myU,function(d){if(d.error){$('analytics-body').innerHTML='<span style="color:gray">'+esc(d.error)+'</span>';return}var h='<b>Views:</b> '+d.views+'<br><b>Likes:</b> '+d.likes+'<br><b>Reposts:</b> '+d.reposts+'<br><b>Replies:</b> '+d.replies+'<br><b>Age:</b> '+Math.floor(d.age/3600000)+'h<br>';if(d.recentLikers&&d.recentLikers.length){h+='<br><b>Recent likers:</b><br>';for(var i=0;i<d.recentLikers.length;i++)h+=esc(d.recentLikers[i])+'<br>'}$('analytics-body').innerHTML=h})}
+
+// Trending users
+function loadTrendingUsers(){apiGet('/api/trending-users',function(d){var el=$('feed');el.innerHTML='';if(!d.users||!d.users.length){el.innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No trending users this week</div>';return}for(var i=0;i<d.users.length;i++){var u=d.users[i];var div=document.createElement('div');div.className='post';var pfp=u.pfp?'<img src="'+u.pfp+'" style="width:36px;height:36px;border:1px solid #d4d0c8;object-fit:cover;vertical-align:middle;margin-right:8px">':'';var badges='';if(u.badges)for(var j=0;j<u.badges.length;j++)badges+='<span class="badge-tag">'+esc(u.badges[j])+'</span>';div.innerHTML='<div style="padding:10px">'+pfp+'<span style="color:'+(u.color||'#000')+';font-weight:bold;font-size:14px;cursor:pointer" onclick="viewUser(\''+u.username+'\')">'+esc(u.displayName)+'</span>'+badges+' <span style="color:gray">@'+esc(u.username)+'</span><div style="font-size:11px;color:gray;margin-top:4px">+'+u.newFollowers+' new followers this week</div></div>';el.appendChild(div)}})}
+
+// Load pinned post on profile
+function loadPinnedPost(un){apiGet('/api/user/'+un+'/pinned?viewer='+myU,function(d){var el=$('pv-pinned');if(!d.post){el.innerHTML='';return}var p=d.post;el.innerHTML='<div style="font-size:10px;color:gray;margin-bottom:2px">&#128204; Pinned post</div><div class="post" style="margin:0"><div class="post-body">'+fmtText(p.text)+'</div><div class="post-actions"><span onclick="viewThread(\''+p.id+'\')">View</span> &#9829; '+p.like_count+'</div></div>'})}
+
+// Schedule post
+function showSchedulePost(){$('mo-bg').style.display='block';$('mo-schedpost').style.display='block';$('sp-text').value=$('compose-text').value;var now=new Date();now.setMinutes(now.getMinutes()+30);$('sp-time').value=now.toISOString().slice(0,16);$('sp-e').innerHTML='';loadScheduledPosts()}
+function doSchedulePost(){var text=$('sp-text').value.trim();var time=new Date($('sp-time').value).getTime();if(!text){$('sp-e').innerHTML='<span style="color:#c00">Write something</span>';return}if(time<=Date.now()){$('sp-e').innerHTML='<span style="color:#c00">Must be in the future</span>';return}api('/api/schedule-post',{token:myTk,text:text,sendAt:time},function(d){if(d.error)$('sp-e').innerHTML='<span style="color:#c00">'+esc(d.error)+'</span>';else{$('sp-e').innerHTML='<span style="color:green">Scheduled!</span>';loadScheduledPosts()}})}
+function loadScheduledPosts(){api('/api/scheduled-posts',{token:myTk},function(d){var el=$('sp-list');el.innerHTML='';if(!d.posts||!d.posts.length){el.innerHTML='<span style="color:gray">None</span>';return}for(var i=0;i<d.posts.length;i++){var s=d.posts[i];var div=document.createElement('div');div.style.cssText='padding:2px 0;border-bottom:1px solid #ddd;font-size:10px';div.innerHTML=esc(s.text.substring(0,40))+'... → '+new Date(parseInt(s.send_at)).toLocaleString()+' <span style="color:#c00;cursor:pointer" onclick="cancelSchedPost(\''+s.id+'\')">[x]</span>';el.appendChild(div)}})}
+function cancelSchedPost(id){api('/api/cancel-scheduled-post',{token:myTk,id:id},function(){loadScheduledPosts()})}
+
+// Admin reports
+function loadReports(){api('/api/admin/reports',{token:myTk},function(d){var el=$('adm-reports');el.innerHTML='';if(!d.reports||!d.reports.length){el.innerHTML='<span style="color:gray">No pending reports</span>';return}for(var i=0;i<d.reports.length;i++){var r=d.reports[i];var div=document.createElement('div');div.style.cssText='padding:3px 0;border-bottom:1px solid #ddd;font-size:10px';div.innerHTML='<b>'+esc(r.reporter_name)+'</b> reported post '+esc(r.post_id).substring(0,8)+'... <br>Reason: '+esc(r.reason||'None')+'<br><input type="button" class="B Bs" value="Dismiss" onclick="resolveReport(\''+r.id+'\',\'resolved\',\'\')"> <input type="button" class="B Bs" value="Delete Post" onclick="resolveReport(\''+r.id+'\',\'delete\',\''+r.post_id+'\')">';el.appendChild(div)}})}
+function resolveReport(rid,action,pid){api('/api/admin/resolve-report',{token:myTk,reportId:rid,action:action,postId:pid},function(d){loadReports();if(action==='delete')refreshFeed()})}
+
+// === BATCH B ===
+
+// Comments
+function loadComments(postId){apiGet('/api/post/'+postId+'/comments',function(d){var el=$('comment-list');if(!el)return;el.innerHTML='';if(!d.comments||!d.comments.length){el.innerHTML='<span style="color:gray;font-size:11px">No comments yet</span>';return}for(var i=0;i<d.comments.length;i++){var c=d.comments[i];var div=document.createElement('div');div.style.cssText='padding:4px 0;border-bottom:1px groove #d4d0c8;font-size:11px';var pfp=c.pfp?'<img src="'+c.pfp+'" style="width:20px;height:20px;border:1px solid #d4d0c8;object-fit:cover;vertical-align:middle;margin-right:4px">':'';div.innerHTML=pfp+'<b style="color:'+(c.color||'#000')+';cursor:pointer" onclick="viewUser(\''+c.username+'\')">'+esc(c.display_name)+'</b> '+esc(c.text)+' <span style="color:gray;font-size:9px">'+timeAgo(c.created_at)+'</span> <span style="cursor:pointer" onclick="likeComment(\''+c.id+'\',\''+postId+'\')">&#9829; '+c.like_count+'</span>'+(c.username===myU?' <span style="color:#c00;cursor:pointer;font-size:9px" onclick="deleteComment(\''+c.id+'\',\''+postId+'\')">[del]</span>':'');el.appendChild(div)}})}
+function postComment(postId){var text=$('comment-text').value.trim();if(!text){toast('Write something','err');return}api('/api/comment',{token:myTk,postId:postId,text:text},function(d){if(d.error)toast(d.error,'err');else{$('comment-text').value='';loadComments(postId)}})}
+function likeComment(cid,pid){api('/api/like-comment',{token:myTk,commentId:cid},function(d){if(!d.error)loadComments(pid)})}
+function deleteComment(cid,pid){showConfirm('Delete comment?',function(){api('/api/delete-comment',{token:myTk,commentId:cid},function(d){if(!d.error)loadComments(pid)})})}
+
+// Templates
+function showTemplates(){$('mo-bg').style.display='block';$('mo-templates').style.display='block';$('tmpl-e').innerHTML='';loadTemplateList()}
+function loadTemplateList(){api('/api/my-templates',{token:myTk},function(d){var el=$('tmpl-list');el.innerHTML='';if(!d.templates||!d.templates.length){el.innerHTML='<span style="color:gray">No templates</span>';return}for(var i=0;i<d.templates.length;i++){var t=d.templates[i];var div=document.createElement('div');div.style.cssText='padding:3px 0;border-bottom:1px solid #ddd;font-size:11px';div.innerHTML='<b>'+esc(t.name)+'</b>: '+esc(t.text.substring(0,60))+'... <input type="button" class="B Bs" value="Use" onclick="useTemplate(\''+esc(t.text).replace(/'/g,'&#39;')+'\')"> <input type="button" class="B Bs" value="Del" onclick="delTemplate(\''+t.id+'\')">';el.appendChild(div)}})}
+function saveTemplate(){var name=$('tmpl-name').value.trim(),text=$('tmpl-text').value.trim();if(!name||!text){$('tmpl-e').innerHTML='<span style="color:#c00">Both fields required</span>';return}api('/api/save-template',{token:myTk,name:name,text:text},function(d){if(d.error)$('tmpl-e').innerHTML='<span style="color:#c00">'+esc(d.error)+'</span>';else{$('tmpl-e').innerHTML='<span style="color:green">Saved!</span>';$('tmpl-name').value='';$('tmpl-text').value='';loadTemplateList()}})}
+function useTemplate(text){$('compose-text').value=text;updateCC();closeModal()}
+function delTemplate(id){api('/api/delete-template',{token:myTk,id:id},function(){loadTemplateList()})}
+
+// Lists
+function showListsManager(){$('mo-bg').style.display='block';$('mo-lists').style.display='block';$('list-e').innerHTML='';loadMyLists()}
+function loadMyLists(){api('/api/my-lists',{token:myTk},function(d){var el=$('lists-list');el.innerHTML='';if(!d.lists||!d.lists.length){el.innerHTML='<span style="color:gray">No lists yet</span>';return}for(var i=0;i<d.lists.length;i++){var l=d.lists[i];var div=document.createElement('div');div.style.cssText='padding:3px 0;border-bottom:1px solid #ddd;font-size:11px';div.innerHTML='<b>'+esc(l.name)+'</b> ('+l.memberCount+' members) <input type="button" class="B Bs" value="View" onclick="viewList(\''+l.id+'\')"> <input type="button" class="B Bs" value="Del" onclick="deleteList(\''+l.id+'\')">';el.appendChild(div)}})}
+function createList(){var name=$('list-name').value.trim();if(!name){$('list-e').innerHTML='<span style="color:#c00">Name required</span>';return}api('/api/create-list',{token:myTk,name:name,description:$('list-desc').value,private:$('list-priv').checked},function(d){if(d.error)$('list-e').innerHTML='<span style="color:#c00">'+esc(d.error)+'</span>';else{$('list-e').innerHTML='<span style="color:green">Created!</span>';$('list-name').value='';$('list-desc').value='';loadMyLists()}})}
+function deleteList(id){showConfirm('Delete list?',function(){api('/api/list-delete',{token:myTk,listId:id},function(){loadMyLists()})})}
+var curListId='';
+function viewList(id){curListId=id;closeModal();$('mo-bg').style.display='block';$('mo-listview').style.display='block';$('lv-e').innerHTML='';apiGet('/api/list/'+id,function(d){$('lv-title').innerHTML=esc(d.list.name);var el=$('lv-members');el.innerHTML='';for(var i=0;i<d.members.length;i++){var m=d.members[i];var div=document.createElement('div');div.style.cssText='padding:2px 0;font-size:11px';var pfp=m.pfp?'<img src="'+m.pfp+'" style="width:20px;height:20px;object-fit:cover;vertical-align:middle;margin-right:4px;border:1px solid #d4d0c8">':'';div.innerHTML=pfp+'<b style="color:'+(m.color||'#000')+'">'+esc(m.display_name)+'</b> <span style="color:gray">@'+esc(m.username)+'</span> <span style="color:#c00;cursor:pointer;font-size:9px" onclick="listRemoveUser(\''+m.username+'\')">[x]</span>';el.appendChild(div)}})}
+function listAddUser(){var un=$('lv-add').value.trim().toLowerCase();if(!un)return;api('/api/list-add',{token:myTk,listId:curListId,username:un},function(d){if(d.error)$('lv-e').innerHTML='<span style="color:#c00">'+esc(d.error)+'</span>';else{$('lv-add').value='';viewList(curListId)}})}
+function listRemoveUser(un){api('/api/list-remove',{token:myTk,listId:curListId,username:un},function(){viewList(curListId)})}
+function viewListTimeline(){closeModal();curTab='listtimeline';$('feed').innerHTML='';oldestTs=null;$('compose-box').style.display='none';$('profile-view').style.display='none';api('/api/list-timeline',{token:myTk,listId:curListId,before:Date.now()+1},function(d){if(d.posts&&d.posts.length)renderPosts(d.posts);else $('feed').innerHTML='<div class="post" style="padding:12px;text-align:center;color:gray">No posts from list members</div>'})}
+
+// Embed
+function getEmbed(id){apiGet('/api/post/'+id+'/embed',function(d){if(d.error){toast(d.error,'err');return}if(navigator.clipboard)navigator.clipboard.writeText(d.html).then(function(){toast('Embed HTML copied!','ok')});else toast('Copy: '+d.html,'ok')})}
+
+// Quote of the day
+function loadQOTD(){apiGet('/api/quote-of-the-day',function(d){if(d.quote){$('qotd').style.display='';$('qotd-content').innerHTML='"'+esc(d.quote.text)+'"'+(d.quote.author?' — '+esc(d.quote.author):'')}else $('qotd').style.display='none'})}
+
+// Admin: add quote
+function addQuote(){var t=$('adm-qt').value.trim(),a=$('adm-qa').value.trim();if(!t){$('adm-qe').innerHTML='<span style="color:#c00">Text required</span>';return}api('/api/admin/add-quote',{token:myTk,text:t,author:a},function(d){if(d.error)$('adm-qe').innerHTML='<span style="color:#c00">'+esc(d.error)+'</span>';else{$('adm-qe').innerHTML='<span style="color:green">Added!</span>';$('adm-qt').value='';$('adm-qa').value=''}})}
 
 // Lightbox
 function openLB(url){$('lb-img').src=url;$('lb').style.display='block'}
